@@ -1,38 +1,24 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ChevronDown, Heart, ShoppingBasket, Search } from "lucide-react"; // Updated import
-import { motion, AnimatePresence } from "framer-motion";
-import { Input } from "../../ui/input/SearchBar";
-import { Button } from "../Button";
+import React, { useState, useEffect } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { ChevronDown, Heart, ShoppingBasket, Search } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Input } from "../input/SearchBar"
+import { Button } from "../Button"
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [accountOpen, setAccountOpen] = useState(false);
-  const [wishlistOpen, setWishlistOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [cartTotal, setCartTotal] = useState(0);
-  const [wishlistTotal, setWishlistTotal] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [accountOpen, setAccountOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const addToCart = () => {
-    setCartTotal(cartTotal + 1); // Mock logic
-    setCartOpen(true);
-  };
-
-  const addToWishlist = () => {
-    setWishlistTotal(wishlistTotal + 1); // Mock logic
-    setWishlistOpen(true);
-  };
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm">
@@ -82,51 +68,18 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-            <div className="relative">
-              <Button variant="outline" size="icon" onClick={addToWishlist}>
-                <Heart className="h-5 w-5" />
-                <span className="sr-only">Wishlist</span>
-              </Button>
-              {/* Wishlist popup */}
-              <AnimatePresence>
-                {wishlistOpen && (
-                  <motion.div
-                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="px-4 py-2 text-sm text-gray-700">Total items in wishlist: {wishlistTotal}</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            <div className="relative">
-              <Button
-                variant="default"
-                size="icon"
-                className="bg-green-500 text-white" 
-                onClick={addToCart}
-              >
-                <ShoppingBasket className="h-5 w-5" /> {/* Updated icon */}
-                <span className="sr-only">Cart</span>
-              </Button>
-              {/* Cart popup */}
-              <AnimatePresence>
-                {cartOpen && (
-                  <motion.div
-                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="px-4 py-2 text-sm text-gray-700">Total items in cart: {cartTotal}</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <Button variant="outline" size="icon">
+              <Heart className="h-5 w-5" />
+              <span className="sr-only">Wishlist</span>
+            </Button>
+            <Button
+              variant="default"
+              size="icon"
+              className="bg-green-500 text-white"
+            >
+              <ShoppingBasket className="h-5 w-5" />
+              <span className="sr-only">Cart</span>
+            </Button>
           </div>
         </div>
       </div>
@@ -154,5 +107,5 @@ export default function Navbar() {
         </div>
       </motion.div>
     </nav>
-  );
+  )
 }
