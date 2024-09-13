@@ -1,124 +1,158 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ChevronDown, ChevronUp, Heart, ShoppingCart } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ChevronDown, Heart, ShoppingBasket, Search } from "lucide-react"; // Updated import
+import { motion, AnimatePresence } from "framer-motion";
+import { Input } from "../../ui/input/SearchBar";
+import { Button } from "../Button";
 
-const Navbar = () => {
-    const [categoryOpen, setCategoryOpen] = useState(false);
-    const [accountOpen, setAccountOpen] = useState(false);
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [wishlistTotal, setWishlistTotal] = useState(0);
 
-    return (
-        <div className="w-4/5 mx-auto sticky top-0 left-0 right-0 z-50 bg-white">
-            <nav className="px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-                {/* Logo */}
-                <div className="flex items-center mb-4 md:mb-0">
-                    <Link href="/">
-                        <Image src="/images/logo/logo.png" alt="Taste of Africa Logo" width={32} height={32} className="w-auto" />
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const addToCart = () => {
+    setCartTotal(cartTotal + 1); // Mock logic
+    setCartOpen(true);
+  };
+
+  const addToWishlist = () => {
+    setWishlistTotal(wishlistTotal + 1); // Mock logic
+    setWishlistOpen(true);
+  };
+
+  return (
+    <nav className="sticky top-0 z-50 bg-white shadow-sm">
+      {/* Main Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0">
+            <Link href="/">
+              <Image src="/images/logo/logo.png" alt="Taste of Africa Logo" width={40} height={40} />
+            </Link>
+          </div>
+          <div className="flex-1 max-w-2xl mx-4">
+            <div className="relative">
+              <Input type="text" placeholder="Search products..." className="w-full pl-10 pr-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <Button
+                variant="ghost"
+                className="flex items-center space-x-1"
+                onClick={() => setAccountOpen(!accountOpen)}
+              >
+                <span>Your Account</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${accountOpen ? "rotate-180" : ""}`} />
+              </Button>
+              <AnimatePresence>
+                {accountOpen && (
+                  <motion.div
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Link href="/account/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Login
                     </Link>
-                </div>
-
-                {/* Navigation Links */}
-                <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-sm font-medium mb-4 md:mb-0">
-                    <li><Link href="/shop">Shop Now</Link></li>
-                    <li><Link href="/promos">Promos</Link></li>
-                    <li className="relative">
-                        <button
-                            className="flex items-center relative focus:outline-none"
-                            onClick={() => setCategoryOpen(!categoryOpen)}
-                        >
-                            <span>Browse Categories</span>
-                            <motion.div
-                                className="absolute inset-0 flex items-center justify-center"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: categoryOpen ? 1 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                            </motion.div>
-                            <motion.div
-                                initial={{ rotate: 0 }}
-                                animate={{ rotate: categoryOpen ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ChevronDown className="ml-1 h-4 w-4" />
-                            </motion.div>
-                        </button>
-                        <AnimatePresence>
-                            {categoryOpen && (
-                                <motion.div
-                                    className="absolute hidden md:block bg-white p-4 mt-2"
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    <ul>
-                                        <li><Link href="/categories/food">Food Products</Link></li>
-                                        <li><Link href="/categories/skincare">Skin Care </Link></li>
-                                        <li><Link href="/categories/haircare">Hair Care </Link></li>
-                                        <li><Link href="/categories/accessories">Fashion </Link></li>
-                                    </ul>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </li>
-                    <li className="relative">
-                        <button
-                            className="flex items-center relative focus:outline-none"
-                            onClick={() => setAccountOpen(!accountOpen)}
-                        >
-                            <span>Your Account</span>
-                            <motion.div
-                                className="absolute inset-0 flex items-center justify-center"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: accountOpen ? 1 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                            </motion.div>
-                            <motion.div
-                                initial={{ rotate: 0 }}
-                                animate={{ rotate: accountOpen ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ChevronDown className="ml-1 h-4 w-4" />
-                            </motion.div>
-                        </button>
-                        <AnimatePresence>
-                            {accountOpen && (
-                                <motion.div
-                                    className="absolute hidden md:block bg-white p-4 mt-2"
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    <ul>
-                                        <li><Link href="/account/login">Login</Link></li>
-                                        <li><Link href="/account/sign-up">Sign Up</Link></li>
-                                        <li><Link href="/account/profile">Profile</Link></li>
-                                    </ul>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </li>
-                </ul>
-
-                {/* Wishlist and Cart */}
-                <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                    <Link href="/wishlist" className="border px-4 py-2 rounded-lg flex items-center justify-center">
-                        <Heart className="mr-2 h-4 w-4" />
-                        Wishlist
+                    <Link href="/account/sign-up" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Sign Up
                     </Link>
-                    <Link href="/cart" className="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center justify-center">
-                        <ShoppingCart className="mr-2 h-4 w-4" />
-                        Cart
+                    <Link href="/account/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Profile
                     </Link>
-                </div>
-            </nav>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            <div className="relative">
+              <Button variant="outline" size="icon" onClick={addToWishlist}>
+                <Heart className="h-5 w-5" />
+                <span className="sr-only">Wishlist</span>
+              </Button>
+              {/* Wishlist popup */}
+              <AnimatePresence>
+                {wishlistOpen && (
+                  <motion.div
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="px-4 py-2 text-sm text-gray-700">Total items in wishlist: {wishlistTotal}</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            <div className="relative">
+              <Button
+                variant="default"
+                size="icon"
+                className="bg-green-500 text-white" 
+                onClick={addToCart}
+              >
+                <ShoppingBasket className="h-5 w-5" /> {/* Updated icon */}
+                <span className="sr-only">Cart</span>
+              </Button>
+              {/* Cart popup */}
+              <AnimatePresence>
+                {cartOpen && (
+                  <motion.div
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="px-4 py-2 text-sm text-gray-700">Total items in cart: {cartTotal}</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
-    );
-}
+      </div>
 
-export default Navbar;
+      {/* Secondary Section */}
+      <motion.div
+        className="bg-gray-50"
+        initial={{ height: "auto" }}
+        animate={{ height: isScrolled ? 0 : "auto" }}
+        transition={{ duration: 0.3 }}
+        style={{ overflow: "hidden" }}
+      >
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-12 space-x-8">
+            <Link href="/shop" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+              Shop Now
+            </Link>
+            <Link href="/promos" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+              Promos
+            </Link>
+            <Link href="/categories" className="flex items-center space-x-1 text-sm font-medium text-gray-700 hover:text-gray-900">
+              <span>Browse Categories</span>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+    </nav>
+  );
+}
