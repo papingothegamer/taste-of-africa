@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import React, { useState, useEffect, ReactNode } from 'react'
 import Image from 'next/image'
@@ -120,7 +120,7 @@ export default function ShopPage() {
   }
 
   // Shuffle products to display
-  const oraimoProducts = shuffleArray(detailedProducts).slice(0, 4)
+  const promoProducts = shuffleArray(detailedProducts).slice(0, 4)
   const featuredProducts = shuffleArray(detailedProducts).slice(0, 4)
 
   return (
@@ -141,14 +141,14 @@ export default function ShopPage() {
         </Modal>
 
         {/* Desktop Sidebar */}
-        <div className="hidden lg:block w-1/5 bg-white rounded-lg shadow-md p-4">
-          <h2 className="font-bold text-lg mb-4">Categories</h2>
-          <ul>
-            {categories.map((category, index) => (
-              <li key={index} className="mb-2 hover:text-orange-500 cursor-pointer">{category}</li>
-            ))}
-          </ul>
-        </div>
+        <div id="categories" className="lg:w-1/5 bg-white rounded-lg shadow-md p-4">
+  <h2 className="font-bold text-lg mb-4">Categories</h2>
+  <ul>
+    {categories.map((category, index) => (
+      <li key={index} className="mb-2 hover:text-green-500 cursor-pointer">{category}</li>
+    ))}
+  </ul>
+</div>
 
         {/* Main Content */}
         <div className="lg:w-3/5">
@@ -193,11 +193,12 @@ export default function ShopPage() {
         ))}
       </div>
 
-      {/* ORAIMO PRODUCTS Section */}
-      <div className="mb-8 bg-green-700 text-white p-4 rounded-lg">
-        <h2 className="text-xl font-bold mb-4">ORAIMO PRODUCTS</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {oraimoProducts.map((product) => (
+      {/* Promos Section */}
+      <div id="promos" className="mb-8 bg-green-700 text-white p-4 rounded-lg">
+  <h2 className="text-xl font-bold mb-4">Promos Here!</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    {promoProducts.map((product) => (
+
             <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden relative text-gray-800">
               <Image
                 src={product.image}
