@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, Star, TrendingUp } from 'lucide-react'
+import { ArrowRight, Star, TrendingUp, Mail } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 
 const categories = [
@@ -144,9 +144,9 @@ export default function CategoriesPage() {
             className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
             required
           />
-          <Button type="submit" className="w-full sm:w-auto bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-            Subscribe
-          </Button>
+          <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white rounded-l-none">
+              Subscribe <Mail className="ml-2 h-4 w-4" />
+            </Button>
         </form>
       </motion.div>
     </div>
