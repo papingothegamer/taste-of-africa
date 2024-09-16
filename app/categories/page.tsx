@@ -8,12 +8,12 @@ import { ArrowRight, Star, TrendingUp } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 
 const categories = [
-  { id: 1, name: 'Fresh Food', image: '/placeholder.svg', link: '/category/fresh-food' },
-  { id: 2, name: 'Dry Food', image: '/placeholder.svg', link: '/category/dry-food' },
-  { id: 3, name: 'Beverages', image: '/placeholder.svg', link: '/category/beverages' },
-  { id: 4, name: 'Hair Care', image: '/placeholder.svg', link: '/category/hair-care' },
-  { id: 5, name: 'Skin Care', image: '/placeholder.svg', link: '/category/skin-care' },
-  { id: 6, name: 'Accessories', image: '/placeholder.svg', link: '/category/accessories' },
+  { id: 1, name: 'Fresh Food', image: '/placeholder.svg', link: '/categories/fresh-food' },
+  { id: 2, name: 'Dry Food', image: '/placeholder.svg', link: '/categories/dry-food' },
+  { id: 3, name: 'Beverages', image: '/placeholder.svg', link: '/categories/beverages' },
+  { id: 4, name: 'Hair Care', image: '/placeholder.svg', link: '/categories/hair-care' },
+  { id: 5, name: 'Skin Care', image: '/placeholder.svg', link: '/categories/skin-care' },
+  { id: 6, name: 'Accessories', image: '/placeholder.svg', link: '/categories/accessories' },
 ]
 
 const featuredProducts = [
@@ -61,7 +61,7 @@ export default function CategoriesPage() {
               />
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{category.name}</h3>
-                <Button className="w-full  bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <Button className="w-full bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
                   Explore <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
@@ -93,7 +93,7 @@ export default function CategoriesPage() {
                 <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
                 <p className="text-sm text-gray-600 mb-2">{product.category}</p>
                 <p className="text-lg font-bold mb-2">${product.price.toFixed(2)}</p>
-                <Button className="w-full   bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Add to Cart</Button>
+                <Button className="w-full bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Add to Cart</Button>
               </div>
             </motion.div>
           ))}
@@ -144,7 +144,7 @@ export default function CategoriesPage() {
             className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
             required
           />
-          <Button type="submit" className="w-full sm:w-auto  bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <Button type="submit" className="w-full sm:w-auto bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
             Subscribe
           </Button>
         </form>
