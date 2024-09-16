@@ -23,9 +23,14 @@ type SimpleProduct = {
 
 // Categories
 const categories = [
-  'Fresh Food', 'Dry Food', 'Beverages', 'Hair Care', 'Skincare',
-  'Accessories'
+  { id: 1, name: 'Fresh Food', link: '/categories/fresh-food' },
+  { id: 2, name: 'Dry Food', link: '/categories/dry-food' },
+  { id: 3, name: 'Beverages', link: '/categories/beverages' },
+  { id: 4, name: 'Hair Care', link: '/categories/hair-care' },
+  { id: 5, name: 'Skin Care', link: '/categories/skin-care' },
+  { id: 6, name: 'Accessories', link: '/categories/accessories' },
 ]
+
 
 // Carousel items
 const carouselItems = [
@@ -124,31 +129,37 @@ export default function ShopPage() {
   const featuredProducts = shuffleArray(detailedProducts).slice(0, 4)
 
   return (
-    <div className="mx-auto px-4 py-8 w-full lg:w-4/5">
-      <div className="flex flex-col lg:flex-row gap-4 mb-8">
-        {/* Mobile Sidebar Trigger */}
-        <Button className="lg:hidden mb-4" variant="outline" onClick={() => setIsSidebarOpen(true)}>
-          <Menu className="mr-2 h-4 w-4" /> Categories
-        </Button>
+<div className="mx-auto px-4 py-8 w-full lg:w-4/5">
+  <div className="flex flex-col lg:flex-row gap-4 mb-8">
+    
+    {/* Mobile Sidebar Trigger */}
+    <Button className="lg:hidden mb-4" variant="outline" onClick={() => setIsSidebarOpen(true)}>
+      <Menu className="mr-2 h-4 w-4" /> Categories
+    </Button>
 
-        {/* Custom Modal for Mobile Sidebar */}
-        <Modal isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
-          <ul>
-            {categories.map((category, index) => (
-              <li key={index} className="mb-2 hover:text-orange-500 cursor-pointer">{category}</li>
-            ))}
-          </ul>
-        </Modal>
+    {/* Custom Modal for Mobile Sidebar */}
+    <Modal isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
+      <ul>
+        {categories.map((category, index) => (
+          <li key={category.id} className="mb-2 hover:text-orange-500 cursor-pointer">
+            <a href={category.link}>{category.name}</a>
+          </li>
+        ))}
+      </ul>
+    </Modal>
 
-        {/* Desktop Sidebar */}
-        <div id="categories" className="lg:w-1/5 bg-white rounded-lg shadow-md p-4">
-  <h2 className="font-bold text-lg mb-4">Categories</h2>
-  <ul>
-    {categories.map((category, index) => (
-      <li key={index} className="mb-2 hover:text-green-500 cursor-pointer">{category}</li>
-    ))}
-  </ul>
-</div>
+    {/* Desktop Sidebar (visible only on large screens) */}
+    <div id="categories" className="hidden lg:block lg:w-1/5 bg-white rounded-lg shadow-md p-4">
+      <h2 className="font-bold text-lg mb-4">Categories</h2>
+      <ul>
+        {categories.map((category) => (
+          <li key={category.id} className="mb-2 hover:text-green-500 cursor-pointer">
+            <a href={category.link}>{category.name}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
 
         {/* Main Content */}
         <div className="lg:w-3/5">

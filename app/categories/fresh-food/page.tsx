@@ -132,9 +132,6 @@ export default function FreshFoodCategory() {
                   </Link>
                   <div className="absolute top-2 right-2 flex flex-col gap-2">
                     <Button variant="secondary" size="icon" className="rounded-full bg-white bg-opacity-70 hover:bg-opacity-100">
-                      <ShoppingBasket className="h-4 w-4" />
-                    </Button>
-                    <Button variant="secondary" size="icon" className="rounded-full bg-white bg-opacity-70 hover:bg-opacity-100">
                       <Heart className="h-4 w-4" />
                     </Button>
                   </div>
@@ -165,8 +162,9 @@ export default function FreshFoodCategory() {
                       </Button>
                     </div>
                   </div>
-                  <Button className="w-full bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500" disabled={quantities[product.id] === 0}>
-                    Add to Cart
+                  <Button className="w-full bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-center space-x-2">
+                    <ShoppingBasket className="h-5 w-5" />
+                    <span>Add to Cart</span>
                   </Button>
                 </div>
               </div>
