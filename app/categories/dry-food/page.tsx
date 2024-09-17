@@ -21,6 +21,15 @@ const dryFoodProducts = [
     { id: 7, name: "Granola", price: 5.99, image: "/placeholder.svg", category: "Cereal" },
     { id: 8, name: "Couscous", price: 3.99, image: "/placeholder.svg", category: "Grains" },
   ]
+
+  const categories = [
+    { id: 1, name: 'Fresh Food', link: '/categories/fresh-food' },
+    { id: 2, name: 'Dry Food', link: '/categories/dry-food' },
+    { id: 3, name: 'Beverages', link: '/categories/beverages' },
+    { id: 4, name: 'Hair Care', link: '/categories/hair-care' },
+    { id: 5, name: 'Skin Care', link: '/categories/skin-care' },
+    { id: 6, name: 'Accessories', link: '/categories/accessories' },
+  ]
   
   export default function DryFoodCategory() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -97,6 +106,19 @@ const dryFoodProducts = [
                 <span>${priceRange[0]}</span>
                 <span>${priceRange[1]}</span>
               </div>
+            </div>
+            
+            <div className="mt-8">
+              <h2 className="font-bold text-lg mb-4">Categories</h2>
+              <ul>
+                {categories.map((category) => (
+                  <li key={category.id} className="mb-2">
+                    <Link href={category.link} className=" hover:text-green-600">
+                      {category.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

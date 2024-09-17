@@ -21,6 +21,16 @@ const skinCareProducts = [
     { id: 7, name: "Toner", price: 6.49, image: "/placeholder.svg", category: "Hydration" },
     { id: 8, name: "Serum", price: 15.99, image: "/placeholder.svg", category: "Treatment" },
   ]
+
+  const categories = [
+    { id: 1, name: 'Fresh Food', link: '/categories/fresh-food' },
+    { id: 2, name: 'Dry Food', link: '/categories/dry-food' },
+    { id: 3, name: 'Beverages', link: '/categories/beverages' },
+    { id: 4, name: 'Hair Care', link: '/categories/hair-care' },
+    { id: 5, name: 'Skin Care', link: '/categories/skin-care' },
+    { id: 6, name: 'Accessories', link: '/categories/accessories' },
+  ]
+  
   
   export default function SkinCareCategory() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -98,9 +108,22 @@ const skinCareProducts = [
                 <span>${priceRange[1]}</span>
               </div>
             </div>
+            
+            <div className="mt-8">
+              <h2 className="font-bold text-lg mb-4">Categories</h2>
+              <ul>
+                {categories.map((category) => (
+                  <li key={category.id} className="mb-2">
+                    <Link href={category.link} className=" hover:text-green-600">
+                      {category.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-
+        
         <div className="w-full lg:w-3/4">
           <div className="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <p className="text-lg font-semibold">{filteredProducts.length} products found</p>
