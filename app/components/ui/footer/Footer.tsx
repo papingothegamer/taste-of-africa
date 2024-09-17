@@ -3,14 +3,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
-const Footer = () => {
+export default function Footer() {
     return (
         <footer className="bg-white pt-16 pb-12 border-t border-gray-100">
             <div className="container mx-auto px-4">
-                {/* Main grid: 4 equal sections */}
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8 items-start">
+                {/* Main grid: 5 equal sections */}
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
                     {/* Logo Section */}
-                    <div className="mb-8 md:mb-0">
+                    <div className="mb-8 md:mb-0 flex flex-col items-start">
                         <Image
                             src="/images/logo/logo.png"
                             alt="Taste of Africa"
@@ -56,8 +56,7 @@ const Footer = () => {
                                     Privacy Policy
                                 </Link>
                             </li>
-                            
-                           <li>
+                            <li>
                                 <Link href="/shipping-policy" className="text-gray-600 hover:text-gray-800">
                                     Shipping Policy
                                 </Link>
@@ -74,7 +73,6 @@ const Footer = () => {
                     <div>
                         <h3 className="text-lg font-semibold mb-4">Help Center</h3>
                         <ul className="space-y-2">
-                            
                             <li>
                                 <Link href="/faqs" className="text-gray-600 hover:text-gray-800">
                                     FAQs
@@ -104,12 +102,12 @@ const Footer = () => {
                     </div>
 
                     {/* Subscribe Section */}
-                    <div>
+                    <div className="flex flex-col items-start">
                         <h3 className="text-lg font-semibold mb-4">Subscribe</h3>
                         <p className="text-gray-600 mb-4">
                             Join our mailing list to receive exclusive offers and updates.
                         </p>
-                        <form className="mb-4">
+                        <form className="mb-4 w-full">
                             <div className="flex flex-col md:flex-row">
                                 <input
                                     type="email"
@@ -130,36 +128,36 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Bottom section with copyright and social links */}
-                <div className="mt-12 pt-8 border-t border-gray-100">
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                        <p className="text-sm text-gray-600 mb-4 md:mb-0">© 2024 Taste of Africa. All rights reserved.</p>
-                        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                {/* Bottom section with copyright, links, and social icons */}
+                <div className="mt-12 pt-8 border-t border-gray-100">  
+                         {/* Social Media Icons */}
+                        <div className="flex justify-center space-x-6 mb-4">
+                            <Link href="#" className="text-gray-400 hover:text-gray-500">
+                                <span className="sr-only">Facebook</span>
+                                <Facebook className="h-6 w-6" />
+                            </Link>
+                            <Link href="#" className="text-gray-400 hover:text-gray-500">
+                                <span className="sr-only">Instagram</span>
+                                <Instagram className="h-6 w-6" />
+                            </Link>
+                            <Link href="#" className="text-gray-400 hover:text-gray-500">
+                                <span className="sr-only">Twitter</span>
+                                <Twitter className="h-6 w-6" />
+                            </Link>
+                        </div>
+                    <div className="flex flex-col items-center">
+                        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 mb-4">
                             <Link href="/privacy-policy" className="text-sm text-gray-600 hover:text-gray-800">Privacy Policy</Link>
                             <Link href="/terms-conditions" className="text-sm text-gray-600 hover:text-gray-800">Terms & Conditions</Link>
                             <Link href="/cookies-policy" className="text-sm text-gray-600 hover:text-gray-800">Cookies Policy</Link>
                         </div>
-                    </div>
 
-                    {/* Social Media Icons */}
-                    <div className="flex justify-center mt-6 space-x-6">
-                        <Link href="#" className="text-gray-400 hover:text-gray-500">
-                            <span className="sr-only">Facebook</span>
-                            <Facebook className="h-6 w-6" />
-                        </Link>
-                        <Link href="#" className="text-gray-400 hover:text-gray-500">
-                            <span className="sr-only">Instagram</span>
-                            <Instagram className="h-6 w-6" />
-                        </Link>
-                        <Link href="#" className="text-gray-400 hover:text-gray-500">
-                            <span className="sr-only">Twitter</span>
-                            <Twitter className="h-6 w-6" />
-                        </Link>
+                 
+
+                        <p className="text-sm text-gray-600">© 2024 Taste of Africa. All rights reserved.</p>
                     </div>
                 </div>
             </div>
         </footer>
     );
 }
-
-export default Footer;
