@@ -9,6 +9,7 @@ import { Label } from "../../components/ui/Label"
 import { Select } from "../../components/ui/Select"
 import { Slider } from "../../components/ui/Slider"
 import { Heart, ShoppingBasket, Plus, Minus } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 // Dummy fresh food products
 const dryFoodProducts = [
@@ -23,15 +24,18 @@ const dryFoodProducts = [
   ]
 
   const categories = [
-    { id: 1, name: 'Fresh Food', link: '/categories/fresh-food' },
-    { id: 2, name: 'Dry Food', link: '/categories/dry-food' },
-    { id: 3, name: 'Beverages', link: '/categories/beverages' },
-    { id: 4, name: 'Hair Care', link: '/categories/hair-care' },
-    { id: 5, name: 'Skin Care', link: '/categories/skin-care' },
-    { id: 6, name: 'Accessories', link: '/categories/accessories' },
+    { id: 1, name: 'Fresh Food', link: '/categories/fresh-food', slug: 'fresh-food' },
+    { id: 2, name: 'Dry Food', link: '/categories/dry-food', slug: 'dry-food' },
+    { id: 3, name: 'Beverages', link: '/categories/beverages', slug: 'beverages' },
+    { id: 4, name: 'Hair Care', link: '/categories/hair-care', slug: 'hair-care' },
+    { id: 5, name: 'Skin Care', link: '/categories/skin-care', slug: 'skin-care' },
+    { id: 6, name: 'Accessories', link: '/categories/accessories', slug: 'accessories' },
   ]
   
   export default function DryFoodCategory() {
+    const pathname = usePathname()
+    const currentCategory = pathname.split('/').pop()
+
     const [searchTerm, setSearchTerm] = useState("")
     const [sortBy, setSortBy] = useState("featured")
     const [priceRange, setPriceRange] = useState([0, 20])
@@ -108,14 +112,23 @@ const dryFoodProducts = [
               </div>
             </div>
             
-            <div className="mt-8">
+           <div className="mt-8">
               <h2 className="font-bold text-lg mb-4">Categories</h2>
               <ul>
                 {categories.map((category) => (
                   <li key={category.id} className="mb-2">
-                    <Link href={category.link} className=" hover:text-green-600">
+                    {/* highlight-start */}
+                    <Link 
+                      href={category.link} 
+                      className={`block p-2 rounded transition-colors ${
+                        category.slug === currentCategory 
+                          ? 'text-green-600 font-semibold' 
+                          : ' hover:text-green-600'
+                      }`}
+                    >
                       {category.name}
                     </Link>
+                    {/* highlight-end */}
                   </li>
                 ))}
               </ul>
