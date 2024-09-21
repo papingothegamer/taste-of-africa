@@ -82,7 +82,7 @@ export default function ProductPage() {
     .slice(0, 4)
 
   return (
-    <div className="container mx-auto px-4 py-8 w-full lg:w-[80%]">
+    <div className="container mx-auto px-4 py-8 w-full lg:w-[60%]">
       <div className="flex flex-col md:flex-row gap-8">
         {/* Product Images */}
         <div className="md:w-1/2">
