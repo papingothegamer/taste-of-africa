@@ -1,26 +1,22 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import { useState, useMemo } from 'react'
 import { Button } from "../../components/ui/Button"
-import { Input } from "../../components/ui/input/SearchBar"
-import { Label } from "../../components/ui/Label"
 import { Select } from "../../components/ui/Select"
-import { Slider } from "../../components/ui/Slider"
-import { Heart, ShoppingBasket, Plus, Minus } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import ProductCard from '../../components/ProductCard'
+import { FilterSidebar } from '../../components/FilterSidebar'
 
-// Dummy fresh food products
+
+// Dummy products
 const hairCareProducts = [
-    { id: 1, name: "Shampoo", price: 6.99, image: "/placeholder.svg", category: "Cleansing" },
-    { id: 2, name: "Conditioner", price: 7.49, image: "/placeholder.svg", category: "Conditioning" },
-    { id: 3, name: "Hair Oil", price: 5.99, image: "/placeholder.svg", category: "Treatment" },
-    { id: 4, name: "Hair Spray", price: 4.99, image: "/placeholder.svg", category: "Styling" },
-    { id: 5, name: "Hair Gel", price: 3.99, image: "/placeholder.svg", category: "Styling" },
-    { id: 6, name: "Hair Mask", price: 8.99, image: "/placeholder.svg", category: "Treatment" },
-    { id: 7, name: "Leave-in Conditioner", price: 9.99, image: "/placeholder.svg", category: "Conditioning" },
-    { id: 8, name: "Heat Protectant", price: 12.99, image: "/placeholder.svg", category: "Treatment" },
+  { id: 25, name: "Shampoo", price: 6.99, image: "/placeholder.svg", category: "Cleansing", rating: 4.3, description: "Nourishing shampoo for all hair types.", productCategory: "hair-care" },
+  { id: 26, name: "Conditioner", price: 7.49, image: "/placeholder.svg", category: "Conditioning", rating: 4.4, description: "Hydrating conditioner for smooth hair.", productCategory: "hair-care" },
+  { id: 27, name: "Hair Oil", price: 5.99, image: "/placeholder.svg", category: "Treatment", rating: 4.6, description: "Nourishing hair oil for shine and health.", productCategory: "hair-care" },
+  { id: 28, name: "Hair Spray", price: 4.99, image: "/placeholder.svg", category: "Styling", rating: 4.1, description: "Long-lasting hair spray for styling.", productCategory: "hair-care" },
+  { id: 29, name: "Hair Gel", price: 3.99, image: "/placeholder.svg", category: "Styling", rating: 4.0, description: "Strong hold hair gel for various styles.", productCategory: "hair-care" },
+  { id: 30, name: "Hair Mask", price: 8.99, image: "/placeholder.svg", category: "Treatment", rating: 4.7, description: "Deep conditioning hair mask for damaged hair.", productCategory: "hair-care" },
+  { id: 31, name: "Leave-in Conditioner", price: 9.99, image: "/placeholder.svg", category: "Conditioning", rating: 4.5, description: "Lightweight leave-in conditioner for daily use.", productCategory: "hair-care" },
+  { id: 32, name: "Heat Protectant", price: 12.99, image: "/placeholder.svg", category: "Treatment", rating: 4.8, description: "Protective spray for heat styling.", productCategory: "hair-care" },
   ]
 
   const categories = [
@@ -33,9 +29,6 @@ const hairCareProducts = [
   ]
   
   export default function HairCareCategory() {
-    const pathname = usePathname()
-    const currentCategory = pathname.split('/').pop()
-
     const [searchTerm, setSearchTerm] = useState("")
     const [sortBy, setSortBy] = useState("featured")
     const [priceRange, setPriceRange] = useState([0, 20])
@@ -44,7 +37,18 @@ const hairCareProducts = [
       hairCareProducts.reduce((acc, product) => ({...acc, [product.id]: 0}), {})
     )
   
-    const filteredProducts = hairCareProducts.filter(product => 
+    const productCategories = useMemo(() => 
+      Array.from(new Set( hairCareProducts.map(p => p.category))),
+      []
+    )
+  
+    const maxPrice = useMemo(() => 
+      Math.max(...hairCareProducts.map(p => p.price)),
+      []
+    )
+  
+
+    const filteredProducts =  hairCareProducts.filter(product => 
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedCategory === "All" || product.category === selectedCategory) &&
       product.price >= priceRange[0] && product.price <= priceRange[1]
@@ -60,150 +64,65 @@ const hairCareProducts = [
           [id]: Math.max(0, prev[id] + change)
         }))
       }
+
+      const handleAddToWishlist = (productId: number) => {
+        // Implement wishlist functionality here
+        console.log(`Added product ${productId} to wishlist`)
+      }
+    
+      const handleAddToCart = (productId: number) => {
+        // Implement add to cart functionality here
+        console.log(`Added product ${productId} to cart`)
+        handleQuantityChange(productId, 1)
+      }
   
     return (
-      <div className="container mx-auto px-4 py-8 w-[80%]">
+      <div className="w-full bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full sm:w-[95%] md:w-[90%] lg:w-[80%]">
         <h1 className="text-3xl font-bold mb-8">Hair Care</h1>
-      
-      <div className="flex flex-col lg:flex-row gap-8 mb-8">
-        <div className="w-full lg:w-1/4">
-          <div className="bg-white p-4 rounded-lg shadow sticky top-4">
-            <h2 className="text-xl font-semibold mb-4">Filters</h2>
-            
-            <div className="mb-4">
-              <Label htmlFor="search">Search</Label>
-              <Input 
-                id="search"
-                type="text" 
-                placeholder="Search products..." 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-4">
-              <Label htmlFor="category">Category</Label>
-              <Select
-                value={selectedCategory}
-                onValueChange={setSelectedCategory}
-                placeholder="Select a category"
-                options={[
-                  { value: "All", label: "All" },
-                  { value: "Styling", label: "Styling" },
-                  { value: "Conditioning", label: "Conditioning" },
-                  { value: "Cleansing", label: "Cleansing" },
-                  { value: "Treatment", label: "Treatment" }
-                ]}
-              />
-            </div>
-
-            <div className="mb-4">
-              <Label>Price Range</Label>
-              <Slider
-                min={0}
-                max={20}
-                step={1}
-                value={priceRange}
-                onValueChange={setPriceRange}
-              />
-              <div className="flex justify-between mt-2">
-                <span>${priceRange[0]}</span>
-                <span>${priceRange[1]}</span>
-              </div>
-            </div>
-           
-            <div className="mt-8">
-              <h2 className="font-bold text-lg mb-4">Categories</h2>
-              <ul>
-                {categories.map((category) => (
-                  <li key={category.id} className="mb-2">
-                    {/* highlight-start */}
-                    <Link 
-                      href={category.link} 
-                      className={`block p-2 rounded transition-colors ${
-                        category.slug === currentCategory 
-                          ? 'text-green-600 font-semibold' 
-                          : ' hover:text-green-600'
-                      }`}
-                    >
-                      {category.name}
-                    </Link>
-                    {/* highlight-end */}
-                  </li>
-                ))}
-              </ul>
-            </div>
+         <div className="flex flex-col lg:flex-row gap-8 mb-8">
+          <div className="w-full lg:w-1/4 xl:w-1/5">
+            <FilterSidebar
+              categories={categories}
+              productCategories={productCategories}
+              onSearchChange={setSearchTerm}
+              onCategoryChange={setSelectedCategory}
+              onPriceRangeChange={setPriceRange}
+              maxPrice={maxPrice}
+            />
           </div>
-        </div>
 
-        <div className="w-full lg:w-3/4">
+          <div className="w-full lg:w-3/4 xl:w-4/5">
           <div className="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="text-lg font-semibold">{filteredProducts.length} products found</p>
-            <div style={{ width: '256px' }}> 
-              <Select
-                value={sortBy}
-                onValueChange={setSortBy}
-                placeholder="Sort by"
-                options={[
-                  { value: "featured", label: "Featured" },
-                  { value: "low", label: "Price: Low to High" },
-                  { value: "high", label: "Price: High to Low" },
-                ]}
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-                <div className="relative">
-                  <Link href={`/product/${product.id}`}>
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={300}
-                      height={200}
-                      className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </Link>
-                  <div className="absolute top-2 right-2 flex flex-col gap-2">
-                    <Button variant="secondary" size="icon" className="rounded-full bg-white bg-opacity-70 hover:bg-opacity-100">
-                      <Heart className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="p-4 flex-grow">
-                  <Link href={`/product/${product.id}`}>
-                    <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                  </Link>
-                  <p className="text-gray-600 mb-2">{product.category}</p>
-                  <p className="text-xl font-bold mb-4">${product.price.toFixed(2)}</p>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => handleQuantityChange(product.id, -1)}
-                        disabled={quantities[product.id] === 0}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <span className="mx-2 w-8 text-center">{quantities[product.id]}</span>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => handleQuantityChange(product.id, 1)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  <Button className="w-full bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-center space-x-2">
-                    <ShoppingBasket className="h-5 w-5" />
-                    <span>Add to Cart</span>
-                  </Button>
-                </div>
+              <p className="text-lg font-semibold">{filteredProducts.length} products found</p>
+              <div className="w-full sm:w-64"> 
+                <Select
+                  value={sortBy}
+                  onValueChange={setSortBy}
+                  placeholder="Sort by"
+                  options={[
+                    { value: "featured", label: "Featured" },
+                    { value: "low", label: "Price: Low to High" },
+                    { value: "high", label: "Price: High to Low" },
+                  ]}
+                />
               </div>
-            ))}
+            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  rating={product.rating}
+                  category={product.category}
+                  onAddToWishlist={() => handleAddToWishlist(product.id)}
+                  onAddToCart={() => handleAddToCart(product.id)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
