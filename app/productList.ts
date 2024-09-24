@@ -8,7 +8,7 @@ export interface Product {
   description: string;
 }
 
-export const allProducts: Product[] = [
+export const allProducts = [
   {
     id: 1,
     name: "Organic Bananas",
@@ -446,3 +446,4 @@ export const allProducts: Product[] = [
 export const fetchProduct = (id: string): Product | null => {
   return allProducts.find(p => p.id.toString() === id) || null;
 };
+

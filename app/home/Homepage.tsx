@@ -83,33 +83,6 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 max-w-[80%]">
-          <h2 className="text-4xl font-bold text-center mb-12">Featured Products</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[1, 2, 3, 4].map((product) => (
-              <div 
-                key={product} 
-                className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
-              >
-                <Image 
-                  src={`/images/products/product-${product}.jpg`} 
-                  alt={`Product ${product}`} 
-                  width={300} 
-                  height={300} 
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">Product Name</h3>
-                  <p className="text-gray-600 mb-2">$XX.XX</p>
-                  <Button className="w-full">Add to Cart</Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Testimonials */}
       <section className="bg-gray-100 py-20">
