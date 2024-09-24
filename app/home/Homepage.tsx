@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Truck, Headphones, CreditCard } from 'lucide-react';
@@ -83,34 +85,68 @@ const Homepage = () => {
         </div>
       </section>
 
-
-      {/* Testimonials */}
+      {/* Testimonials Section */}
       <section className="bg-gray-100 py-20">
         <div className="container mx-auto px-4 max-w-[80%]">
           <h2 className="text-4xl font-bold text-center mb-12">What Our Customers Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((testimonial) => (
+            {[
+              {
+                testimonial: "The quality of the African foods is outstanding! I can't get enough of the spices.",
+                name: "John Doe",
+                role: "Food Enthusiast",
+                image: "/images/testimonials/user-1.jpg"
+              },
+              {
+                testimonial: "Fast shipping and excellent customer service. Highly recommend this store!",
+                name: "Jane Smith",
+                role: "Satisfied Customer",
+                image: "/images/testimonials/user-2.jpg"
+              },
+              {
+                testimonial: "A fantastic selection of authentic African art. My home has never looked better!",
+                name: "Mike Johnson",
+                role: "Art Lover",
+                image: "/images/testimonials/user-3.jpg"
+              }
+            ].map((item, index) => (
               <div 
-                key={testimonial} 
+                key={index} 
                 className="bg-white p-6 rounded-lg shadow-lg"
               >
-                <p className="text-gray-600 mb-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet."</p>
+                <p className="text-gray-600 mb-4">"{item.testimonial}"</p>
                 <div className="flex items-center">
                   <Image 
-                    src={`/images/testimonials/user-${testimonial}.jpg`} 
-                    alt={`User ${testimonial}`} 
+                    src={item.image} 
+                    alt={item.name} 
                     width={50} 
                     height={50} 
                     className="rounded-full mr-4"
                   />
                   <div>
-                    <h4 className="font-semibold">John Doe</h4>
-                    <p className="text-gray-600">Happy Customer</p>
+                    <h4 className="font-semibold">{item.name}</h4>
+                    <p className="text-gray-600">{item.role}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-[80%] text-center">
+          <h2 className="text-4xl font-bold mb-12">Find Us</h2>
+          <div className="relative">
+            <div style={{ height: '400px' }} className="bg-gray-300"> {/* Placeholder for the map */}
+              {/* You can replace this div with your new map library component */}
+              {/* Example: <NewMapComponent /> */}
+            </div>
+          </div>
+          <p className="mt-4 text-gray-600">
+            Come visit us at our store for a unique shopping experience!
+          </p>
         </div>
       </section>
 
