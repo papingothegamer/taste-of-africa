@@ -140,6 +140,9 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-12 space-x-8">
+          <Link href="/" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+              Home
+            </Link>
             <Link href="/shop" className="text-sm font-medium text-gray-700 hover:text-gray-900">
               Shop Now
             </Link>
