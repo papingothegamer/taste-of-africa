@@ -13,7 +13,7 @@ export const allProducts = [
     id: 1,
     name: "Organic Bananas",
     price: 2.99,
-    image: "/images/banana.jpg",
+    image: "/images/misc/products/fresh-food/13254.jpg",
     category: "Fresh Food",
     rating: 4.5,
     description: "Fresh, organic bananas sourced from local farmers."
@@ -49,7 +49,7 @@ export const allProducts = [
     id: 5,
     name: "Organic Spinach",
     price: 3.99,
-    image: "/images/spinach.jpg",
+    image: "/images/misc/products/fresh-food/30028.jpg",
     category: "Fresh Food",
     rating: 4.3,
     description: "Fresh, organic spinach leaves."

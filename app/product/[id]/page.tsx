@@ -130,21 +130,6 @@ export default function ProductPage() {
                   height={600}
                   className="w-full h-auto rounded-lg mb-4"
                 />
-                <div className="grid grid-cols-5 gap-2">
-                  {[product.image, ...Array(4)].map((img: string, index: number) => (
-                    <Image
-                      key={index}
-                      src={img || '/placeholder.svg'}
-                      alt={`${product.name} thumbnail ${index + 1}`}
-                      width={100}
-                      height={100}
-                      className={`w-full h-auto rounded-md cursor-pointer ${
-                        index === currentImageIndex ? 'border-2 border-green-500' : ''
-                      }`}
-                      onClick={() => handleImageChange(index)}
-                    />
-                  ))}
-                </div>
               </div>
 
               {/* Product Details */}
@@ -164,25 +149,6 @@ export default function ProductPage() {
                     ))}
                   </div>
                   <span className="ml-2 text-gray-600">({product.rating})</span>
-                </div>
-                <p className="text-2xl font-bold mb-4">${product.price.toFixed(2)}</p>
-                <div className="flex items-center mb-4">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => handleQuantityChange(-1)}
-                    disabled={quantity === 1}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <span className="mx-4 text-xl">{quantity}</span>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => handleQuantityChange(1)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
                 </div>
                 <div className="flex gap-4 mb-8">
                   <Button className="flex-1 bg-green-600 text-white" onClick={() => handleAddToCart(product)}>
