@@ -1,116 +1,162 @@
-// Import necessary dependencies
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight, Truck, Headphones, CreditCard } from 'lucide-react';
+import { Button } from "../components/ui/Button";
 
 const Homepage = () => {
   return (
-    <div>
-      {/* CTA Section */}
-      <section className="cta-section py-16 bg-gray-50">
-        <div className="container mx-auto flex justify-center w-4/5">
-          <div className="w-full md:w-1/2 text-center">
-            <h1 className="text-4xl font-bold mb-4">Discover African Goods</h1>
-            <p className="text-lg mb-6">
-              Taste of Africa brings you authentic and high-quality products directly from the heart of Africa.
-            </p>
-            <Link href="/shop/">
-              <button className="bg-green-600 text-white px-6 py-3">Shop Now</button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Banner Section */}
-      <section className="relative">
-        <Image src="/images/misc/west-african-food-concept-traditional-600nw-1351940339.webp" alt="Banner Image" width={1200} height={780} className="w-full h-auto" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h2 className="text-3xl font-bold text-white">Explore Our Unique Collection</h2>
+    <div className="bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <Image 
+          src="/images/misc/west-african-food-concept-traditional-600nw-1351940339.webp" 
+          alt="African Food" 
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          priority
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">Discover the Taste of Africa</h1>
+          <p className="text-xl md:text-2xl mb-8">
+            Authentic African goods delivered straight to your doorstep
+          </p>
+          <Link href="/shop" passHref>
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+              Shop Now <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 
       {/* Product Categories Section */}
-      <section className="py-16">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Our Product Categories</h2>
-          <p className="text-lg mb-6">Explore the wide variety of African products that we offer.</p>
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-[80%]">
+          <h2 className="text-4xl font-bold text-center mb-12">Our Product Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="category">
-              <Image src="/icons/food-icon.svg" alt="Food" width={100} height={100} />
-              <h3 className="text-xl font-semibold mt-4">African Foods</h3>
-              <p className="mt-2">Explore authentic food items from different regions of Africa.</p>
-              <Link href="/shop">
-                <button className="mt-4 bg-green-600 text-white px-4 py-2">Shop Now</button>
-              </Link>
-            </div>
-            <div className="category">
-              <Image src="/icons/fashion-icon.svg" alt="Fashion" width={100} height={100} />
-              <h3 className="text-xl font-semibold mt-4">African Fashion</h3>
-              <p className="mt-2">Traditional and modern clothing, accessories, and more.</p>
-              <Link href="/shop">
-                <button className="mt-4 bg-green-600 text-white px-4 py-2">Shop Now</button>
-              </Link>
-            </div>
-            <div className="category">
-              <Image src="/icons/art-icon.svg" alt="Art" width={100} height={100} />
-              <h3 className="text-xl font-semibold mt-4">African Art</h3>
-              <p className="mt-2">Discover unique artworks created by African artisans.</p>
-              <Link href="/shop">
-                <button className="mt-4 bg-green-600 text-white px-4 py-2">Shop Now</button>
-              </Link>
-            </div>
+            {['African Foods', 'African Fashion', 'African Art'].map((category, index) => (
+              <div 
+                key={index} 
+                className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
+              >
+                <Image 
+                  src={`/images/categories/${category.toLowerCase().replace(' ', '-')}.jpg`} 
+                  alt={category} 
+                  width={400} 
+                  height={300} 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold mb-2">{category}</h3>
+                  <p className="text-gray-600 mb-4">Explore authentic {category.toLowerCase()} from different regions of Africa.</p>
+                  <Button variant="outline" className="w-full">
+                    Explore {category}
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="services-section py-16 bg-gray-50">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">Our Services</h2>
+      <section className="bg-green-600 text-white py-20">
+        <div className="container mx-auto px-4 max-w-[80%]">
+          <h2 className="text-4xl font-bold text-center mb-12">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="service">
-              <Image src="/images/shipping.jpg" alt="Fast Shipping" width={300} height={200} />
-              <h3 className="text-xl font-semibold mt-4">Fast Shipping</h3>
-              <p>Get your items delivered quickly and safely.</p>
-            </div>
-            <div className="service">
-              <Image src="/images/support.jpg" alt="Customer Support" width={300} height={200} />
-              <h3 className="text-xl font-semibold mt-4">Customer Support</h3>
-              <p>24/7 customer support to help with your needs.</p>
-            </div>
-            <div className="service">
-              <Image src="/images/payment.jpg" alt="Secure Payment" width={300} height={200} />
-              <h3 className="text-xl font-semibold mt-4">Secure Payment</h3>
-              <p>Enjoy secure and easy payment methods on our site.</p>
-            </div>
+            {[
+              { icon: Truck, title: 'Fast Shipping', description: 'Get your items delivered quickly and safely.' },
+              { icon: Headphones, title: '24/7 Support', description: 'Our customer support team is always here to help.' },
+              { icon: CreditCard, title: 'Secure Payment', description: 'Shop with confidence using our secure payment methods.' },
+            ].map((service, index) => (
+              <div 
+                key={index} 
+                className="bg-white text-gray-800 rounded-lg p-6 shadow-lg text-center transition-transform duration-300 hover:scale-105"
+              >
+                <service.icon className="mx-auto h-16 w-16 text-green-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Address & Contact Section */}
-      <section className="py-16">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">Find Us</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold">Our Location</h3>
-              <p>123 African Market Street, Lodz, Poland</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold">Contact Information</h3>
-              <p>Email: info@tasteofafrica.com</p>
-              <p>Phone: +48 123 456 789</p>
-            </div>
+      {/* Featured Products */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-[80%]">
+          <h2 className="text-4xl font-bold text-center mb-12">Featured Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[1, 2, 3, 4].map((product) => (
+              <div 
+                key={product} 
+                className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
+              >
+                <Image 
+                  src={`/images/products/product-${product}.jpg`} 
+                  alt={`Product ${product}`} 
+                  width={300} 
+                  height={300} 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2">Product Name</h3>
+                  <p className="text-gray-600 mb-2">$XX.XX</p>
+                  <Button className="w-full">Add to Cart</Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section 2 */}
-      <section className="cta-section-2 py-16 bg-green-600 text-white text-center">
-        <h2 className="text-3xl font-bold mb-4">Don&apos;t Miss Out!</h2>
-        <p className="text-lg mb-6">Join our mailing list and stay up to date on exclusive offers and new products.</p>
-        <Link href="/subscribe">
-          <button className="bg-white text-green-600 px-6 py-3">Subscribe</button>
-        </Link>
+      {/* Testimonials */}
+      <section className="bg-gray-100 py-20">
+        <div className="container mx-auto px-4 max-w-[80%]">
+          <h2 className="text-4xl font-bold text-center mb-12">What Our Customers Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((testimonial) => (
+              <div 
+                key={testimonial} 
+                className="bg-white p-6 rounded-lg shadow-lg"
+              >
+                <p className="text-gray-600 mb-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet."</p>
+                <div className="flex items-center">
+                  <Image 
+                    src={`/images/testimonials/user-${testimonial}.jpg`} 
+                    alt={`User ${testimonial}`} 
+                    width={50} 
+                    height={50} 
+                    className="rounded-full mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold">John Doe</h4>
+                    <p className="text-gray-600">Happy Customer</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Subscription */}
+      <section className="bg-green-600 text-white py-20">
+        <div className="container mx-auto px-4 max-w-[80%] text-center">
+          <h2 className="text-4xl font-bold mb-6">Stay Updated</h2>
+          <p className="text-xl mb-8">Subscribe to our newsletter for exclusive offers and updates</p>
+          <form className="max-w-md mx-auto flex">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              className="flex-grow px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            />
+            <Button type="submit" className="bg-white text-green-600 rounded-l-none hover:bg-gray-100">
+              Subscribe
+            </Button>
+          </form>
+        </div>
       </section>
     </div>
   );
