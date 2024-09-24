@@ -8,14 +8,14 @@ import { FilterSidebar } from '../../components/FilterSidebar'
 
 // Dummy products
 const freshFoodProducts = [
-  { id: 1, name: "Organic Bananas", price: 2.99, image: "/placeholder.svg", category: "Fruits", rating: 4.5, description: "Fresh, organic bananas sourced from local farmers.", productCategory: "fresh-food" },
-  { id: 2, name: "Fresh Tomatoes", price: 1.99, image: "/placeholder.svg", category: "Vegetables", rating: 4.2, description: "Juicy, ripe tomatoes perfect for salads.", productCategory: "fresh-food" },
-  { id: 3, name: "Whole Chicken", price: 8.99, image: "/placeholder.svg", category: "Meat", rating: 4.0, description: "Farm-raised, antibiotic-free whole chicken.", productCategory: "fresh-food" },
-  { id: 4, name: "Atlantic Salmon", price: 12.99, image: "/placeholder.svg", category: "Seafood", rating: 4.7, description: "Wild-caught Atlantic salmon, rich in omega-3.", productCategory: "fresh-food" },
-  { id: 5, name: "Organic Spinach", price: 3.99, image: "/placeholder.svg", category: "Vegetables", rating: 4.3, description: "Fresh, organic spinach leaves.", productCategory: "fresh-food" },
-  { id: 6, name: "Red Apples", price: 4.99, image: "/placeholder.svg", category: "Fruits", rating: 4.4, description: "Crisp and sweet red apples.", productCategory: "fresh-food" },
-  { id: 7, name: "Ground Beef", price: 7.99, image: "/placeholder.svg", category: "Meat", rating: 4.1, description: "Lean ground beef from grass-fed cattle.", productCategory: "fresh-food" },
-  { id: 8, name: "Fresh Tilapia", price: 9.99, image: "/placeholder.svg", category: "Seafood", rating: 4.2, description: "Fresh tilapia fillets.", productCategory: "fresh-food" },
+  { id: 1, name: "Organic Bananas", price: 2.99, image: "/images/misc/products/fresh-food/2147866209.jpg", category: "Fruits", rating: 4.5, description: "Fresh, organic bananas sourced from local farmers.", productCategory: "fresh-food" },
+  { id: 2, name: "Fresh Tomatoes", price: 1.99, image: "/images/misc/products/fresh-food/15411.jpg", category: "Vegetables", rating: 4.2, description: "Juicy, ripe tomatoes perfect for salads.", productCategory: "fresh-food" },
+  { id: 3, name: "Whole Chicken", price: 8.99, image: "/images/misc/products/fresh-food/1776.jpg", category: "Meat", rating: 4.0, description: "Farm-raised, antibiotic-free whole chicken.", productCategory: "fresh-food" },
+  { id: 4, name: "Atlantic Salmon", price: 12.99, image: "/images/misc/products/fresh-food/11091.jpg", category: "Seafood", rating: 4.7, description: "Wild-caught Atlantic salmon, rich in omega-3.", productCategory: "fresh-food" },
+  { id: 5, name: "Organic Spinach", price: 3.99, image: "/images/misc/products/fresh-food/30028.jpg", category: "Vegetables", rating: 4.3, description: "Fresh, organic spinach leaves.", productCategory: "fresh-food" },
+  { id: 6, name: "Red Apples", price: 4.99, image: "/images/misc/products/fresh-food/271.jpg", category: "Fruits", rating: 4.4, description: "Crisp and sweet red apples.", productCategory: "fresh-food" },
+  { id: 7, name: "Ground Beef", price: 7.99, image: "/images/misc/products/fresh-food/595.jpg", category: "Meat", rating: 4.1, description: "Lean ground beef from grass-fed cattle.", productCategory: "fresh-food" },
+  { id: 8, name: "Fresh Tilapia", price: 9.99, image: "/images/misc/products/fresh-food/tilapia-raw_1339-896.jpg", category: "Seafood", rating: 4.2, description: "Fresh tilapia fillets.", productCategory: "fresh-food" },
 
 ]
 

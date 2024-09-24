@@ -8,12 +8,12 @@ import { ArrowRight, Star, TrendingUp, Mail } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 
 const categories = [
-  { id: 1, name: 'Fresh Food', image: '/placeholder.svg', link: '/categories/fresh-food' },
-  { id: 2, name: 'Dry Food', image: '/placeholder.svg', link: '/categories/dry-food' },
-  { id: 3, name: 'Beverages', image: '/placeholder.svg', link: '/categories/beverages' },
-  { id: 4, name: 'Hair Care', image: '/placeholder.svg', link: '/categories/hair-care' },
-  { id: 5, name: 'Skin Care', image: '/placeholder.svg', link: '/categories/skin-care' },
-  { id: 6, name: 'Accessories', image: '/placeholder.svg', link: '/categories/accessories' },
+  { id: 1, name: 'Fresh Food', image: '/images/misc/categories/different-vegetables-little-white-bowl-white_176474-82.jpg', link: '/categories/fresh-food' },
+  { id: 2, name: 'Dry Food', image: '/images/misc/categories/various-breakfast-cereals_114579-8977.jpg', link: '/categories/dry-food' },
+  { id: 3, name: 'Beverages', image: '/images/misc/categories/arrangement-colorful-juice-plastic-bottles_23-2148134930.jpg', link: '/categories/beverages' },
+  { id: 4, name: 'Hair Care', image: '/images/misc/categories/beauty-concept_23-2147817608.jpg', link: '/categories/hair-care' },
+  { id: 5, name: 'Skin Care', image: '/images/misc/categories/different-containers-dairy-produce_23-2147935435.jpg', link: '/categories/skin-care' },
+  { id: 6, name: 'Accessories', image: '/images/misc/categories/glasses-cosmetics-near-stylish-makeup-bag_23-2147779029.jpg', link: '/categories/accessories' },
 ]
 
 const featuredProducts = [

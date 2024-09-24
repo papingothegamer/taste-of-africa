@@ -56,7 +56,7 @@ export default function ProductCard({
         <Image
           src={image}
           alt={name}
-          width={300}
+          width={250}
           height={200}
           className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
         />
@@ -140,7 +140,7 @@ export default function ProductCard({
                 size="icon"
                 onClick={onAddToWishlist}
               >
-                <Heart className="h-5 w-5 text-red-500" />
+                <Heart className="h-5 w-5 text-gray-500" />
               </Button>
               <Button
                 variant="ghost"

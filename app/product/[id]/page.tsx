@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/Ta
 import { FilterSidebar } from "../../components/FilterSidebar"
 import { Product, allProducts } from '../../productList'
 import ProductCard from '../../components/ProductCard'
-import { useCart } from '../../context/cartContext' // Import the CartContext
+import { useCart } from '../../context/cartContext' 
 
 const categories = [
   { id: 1, name: 'Fresh Food', link: '/categories/fresh-food', slug: 'fresh-food' },
