@@ -118,6 +118,7 @@ const hairCareProducts = [
                   image={product.image}
                   rating={product.rating}
                   category={product.category}
+                  variant="category"
                   onAddToWishlist={() => handleAddToWishlist(product.id)}
                   onAddToCart={() => handleAddToCart(product.id)}
                 />

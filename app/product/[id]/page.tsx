@@ -9,7 +9,8 @@ import { Button } from "../../components/ui/Button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/Tabs"
 import { FilterSidebar } from "../../components/FilterSidebar"
 import { Product, allProducts } from '../../productList'
-import { ProductCard } from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard'
+import { useCart } from '../../context/cartContext' // Import the CartContext
 
 const categories = [
   { id: 1, name: 'Fresh Food', link: '/categories/fresh-food', slug: 'fresh-food' },
@@ -27,6 +28,8 @@ export default function ProductPage() {
   const [mainImage, setMainImage] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const { addToCart } = useCart() // Get addToCart function from CartContext
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -48,6 +51,15 @@ export default function ProductPage() {
   const handleAddToCart = (productToAdd?: Product) => {
     const productToLog = productToAdd || product;
     if (productToLog) {
+      addToCart({ 
+        id: productToLog.id, 
+        name: productToLog.name, 
+        price: productToLog.price, 
+        quantity, 
+        image: productToLog.image, 
+        category: productToLog.category, 
+        rating: productToLog.rating 
+      });
       console.log(`Added ${quantity} ${productToLog.name}(s) to cart`)
     }
   }
@@ -197,23 +209,22 @@ export default function ProductPage() {
 
             {/* Related Products */}
             <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-4">Related Products</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                {relatedProducts.map((relatedProduct) => (
-                  <ProductCard
-                    key={relatedProduct.id}
-                    id={relatedProduct.id}
-                    name={relatedProduct.name}
-                    price={relatedProduct.price}
-                    image={relatedProduct.image}
-                    category={relatedProduct.category} 
-                    rating={relatedProduct.rating}    
-                    onAddToWishlist={() => handleAddToWishlist(relatedProduct)}
-                    onAddToCart={() => handleAddToCart(relatedProduct)}         
-                  />
-                ))}
-              </div>
-            </div>
+  <h2 className="text-2xl font-bold mb-4">Related Products</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    {relatedProducts.map((relatedProduct) => (
+      <ProductCard
+        key={relatedProduct.id}
+        id={relatedProduct.id}
+        name={relatedProduct.name}
+        price={relatedProduct.price}
+        image={relatedProduct.image}
+        rating={relatedProduct.rating}
+        category={relatedProduct.category} // Ensure 'category' is passed
+        variant='category'
+      />
+    ))}
+  </div>
+</div>
           </div>
         </div>
       </div>

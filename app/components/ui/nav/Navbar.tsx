@@ -7,10 +7,13 @@ import { ChevronDown, Heart, ShoppingBasket, Search, User } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Input } from "../input/SearchBar"
 import { Button } from "../Button"
+import { useCart } from "../../../context/cartContext"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
+  const [isCartPopupVisible, setIsCartPopupVisible] = useState(false)
+  const { cartItems, cartTotal } = useCart()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,18 +74,58 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-            <Button variant="outline" size="icon">
-              <Heart className="h-5 w-5" />
-              <span className="sr-only">Wishlist</span>
-            </Button>
-            <Button
-              variant="default"
-              size="icon"
-              className="bg-green-500 text-white"
+            
+            {/* Wishlist Button */}
+            <Link href="/wishlist">
+              <Button variant="outline" size="icon">
+                <Heart className="h-5 w-5" />
+                <span className="sr-only">Wishlist</span>
+              </Button>
+            </Link>
+
+            {/* Cart Button with Popup */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsCartPopupVisible(true)}
+              onMouseLeave={() => setIsCartPopupVisible(false)}
             >
-              <ShoppingBasket className="h-5 w-5" />
-              <span className="sr-only">Cart</span>
-            </Button>
+              <Button
+                variant="default"
+                size="icon"
+                className="bg-green-500 text-white"
+              >
+                <ShoppingBasket className="h-5 w-5" />
+                <span className="sr-only">Cart</span>
+                {cartItems.length > 0 && (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-green-600 rounded-full">
+                    ${cartTotal.toFixed(2)}
+                  </span>
+                )}
+              </Button>
+
+              <AnimatePresence>
+                {isCartPopupVisible && cartItems.length > 0 && (
+                  <motion.div
+                    className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-50"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="px-4 py-2">
+                      <p className="text-sm font-semibold text-gray-700">Cart Summary</p>
+                      <p className="text-sm text-gray-600">{cartItems.length} item(s)</p>
+                      <p className="text-lg font-bold text-green-600 mt-1">Total: ${cartTotal.toFixed(2)}</p>
+                    </div>
+                    <div className="flex justify-center">
+                      <Link href="/cart">
+                        <Button className="w-full mt-2">View Cart</Button>
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
@@ -95,7 +138,7 @@ export default function Navbar() {
         transition={{ duration: 0.3 }}
         style={{ overflow: "hidden" }}
       >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-12 space-x-8">
             <Link href="/shop" className="text-sm font-medium text-gray-700 hover:text-gray-900">
               Shop Now

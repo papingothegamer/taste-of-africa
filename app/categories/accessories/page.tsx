@@ -117,7 +117,8 @@ const accessoriesProducts = [
                   price={product.price}
                   image={product.image}
                   rating={product.rating}
-                  category={product.category}
+                 category={product.category}
+                  variant="category"
                   onAddToWishlist={() => handleAddToWishlist(product.id)}
                   onAddToCart={() => handleAddToCart(product.id)}
                 />
