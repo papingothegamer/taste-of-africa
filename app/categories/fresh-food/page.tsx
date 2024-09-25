@@ -5,28 +5,17 @@ import { Button } from "../../components/ui/Button"
 import { Select } from "../../components/ui/Select"
 import ProductCard from '../../components/ProductCard'
 import { FilterSidebar } from '../../components/FilterSidebar'
+import { allProducts } from '../../productList'
 
-// Dummy products
-const freshFoodProducts = [
-  { id: 1, name: "Organic Bananas", price: 2.99, image: "/images/misc/products/fresh-food/2147866209.jpg", category: "Fruits", rating: 4.5, description: "Fresh, organic bananas sourced from local farmers.", productCategory: "fresh-food" },
-  { id: 2, name: "Fresh Tomatoes", price: 1.99, image: "/images/misc/products/fresh-food/15411.jpg", category: "Vegetables", rating: 4.2, description: "Juicy, ripe tomatoes perfect for salads.", productCategory: "fresh-food" },
-  { id: 3, name: "Whole Chicken", price: 8.99, image: "/images/misc/products/fresh-food/1776.jpg", category: "Meat", rating: 4.0, description: "Farm-raised, antibiotic-free whole chicken.", productCategory: "fresh-food" },
-  { id: 4, name: "Atlantic Salmon", price: 12.99, image: "/images/misc/products/fresh-food/11091.jpg", category: "Seafood", rating: 4.7, description: "Wild-caught Atlantic salmon, rich in omega-3.", productCategory: "fresh-food" },
-  { id: 5, name: "Organic Spinach", price: 3.99, image: "/images/misc/products/fresh-food/30028.jpg", category: "Vegetables", rating: 4.3, description: "Fresh, organic spinach leaves.", productCategory: "fresh-food" },
-  { id: 6, name: "Red Apples", price: 4.99, image: "/images/misc/products/fresh-food/271.jpg", category: "Fruits", rating: 4.4, description: "Crisp and sweet red apples.", productCategory: "fresh-food" },
-  { id: 7, name: "Ground Beef", price: 7.99, image: "/images/misc/products/fresh-food/595.jpg", category: "Meat", rating: 4.1, description: "Lean ground beef from grass-fed cattle.", productCategory: "fresh-food" },
-  { id: 8, name: "Fresh Tilapia", price: 9.99, image: "/images/misc/products/fresh-food/tilapia-raw_1339-896.jpg", category: "Seafood", rating: 4.2, description: "Fresh tilapia fillets.", productCategory: "fresh-food" },
+interface Category {
+  id: number
+  name: string
+  link: string
+  slug: string
+}
 
-]
 
-const categories = [
-  { id: 1, name: 'Fresh Food', link: '/categories/fresh-food', slug: 'fresh-food' },
-  { id: 2, name: 'Dry Food', link: '/categories/dry-food', slug: 'dry-food' },
-  { id: 3, name: 'Beverages', link: '/categories/beverages', slug: 'beverages' },
-  { id: 4, name: 'Hair Care', link: '/categories/hair-care', slug: 'hair-care' },
-  { id: 5, name: 'Skin Care', link: '/categories/skin-care', slug: 'skin-care' },
-  { id: 6, name: 'Accessories', link: '/categories/accessories', slug: 'accessories' },
-]
+const freshFoodCategory = "Fresh Food"
 
 export default function FreshFoodCategory() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -34,17 +23,25 @@ export default function FreshFoodCategory() {
   const [priceRange, setPriceRange] = useState([0, 20])
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [quantities, setQuantities] = useState<{[key: number]: number}>(
-    freshFoodProducts.reduce((acc, product) => ({...acc, [product.id]: 0}), {})
+    allProducts.reduce((acc, product) => ({...acc, [product.id]: 0}), {})
   )
 
-  const productCategories = useMemo(() => 
-    Array.from(new Set(freshFoodProducts.map(p => p.category))),
+  // Filter products by category
+  const freshFoodProducts = allProducts.filter(product => product.category === freshFoodCategory)
+
+  // Create a proper list of categories with all required fields (id, name, link, slug)
+  const productCategories: Category[] = useMemo(() => 
+    Array.from(new Set(allProducts.map(p => p.category))).map((category, index) => ({
+      id: index + 1,
+      name: category,
+      link: `/categories/${category.toLowerCase().replace(/\s+/g, '-')}`,
+      slug: category.toLowerCase().replace(/\s+/g, '-')
+    })),
     []
   )
-
   const maxPrice = useMemo(() => 
     Math.max(...freshFoodProducts.map(p => p.price)),
-    []
+    [freshFoodProducts]
   )
 
   const filteredProducts = freshFoodProducts.filter(product => 
@@ -83,8 +80,8 @@ export default function FreshFoodCategory() {
         <div className="flex flex-col lg:flex-row gap-8 mb-8">
           <div className="w-full lg:w-1/4 xl:w-1/5">
             <FilterSidebar
-              categories={categories}
-              productCategories={productCategories}
+              categories={productCategories}  
+              productCategories={productCategories.map(cat => cat.name)}
               onSearchChange={setSearchTerm}
               onCategoryChange={setSelectedCategory}
               onPriceRangeChange={setPriceRange}

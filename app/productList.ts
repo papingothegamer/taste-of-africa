@@ -13,7 +13,7 @@ export const allProducts = [
     id: 1,
     name: "Organic Bananas",
     price: 2.99,
-    image: "/images/misc/products/fresh-food/13254.jpg",
+    image: "/images/misc/products/fresh-food/37438.jpg",
     category: "Fresh Food",
     rating: 4.5,
     description: "Fresh, organic bananas sourced from local farmers."
@@ -22,7 +22,7 @@ export const allProducts = [
     id: 2,
     name: "Fresh Tomatoes",
     price: 1.99,
-    image: "/images/tomato.jpg",
+    image: "/images/misc/products/fresh-food/15411.jpg",
     category: "Fresh Food",
     rating: 4.2,
     description: "Juicy, ripe tomatoes perfect for salads."
@@ -31,7 +31,7 @@ export const allProducts = [
     id: 3,
     name: "Whole Chicken",
     price: 8.99,
-    image: "/images/chicken.jpg",
+    image: "/images/misc/products/fresh-food/1776.jpg",
     category: "Fresh Food",
     rating: 4.0,
     description: "Farm-raised, antibiotic-free whole chicken."
@@ -40,7 +40,7 @@ export const allProducts = [
     id: 4,
     name: "Atlantic Salmon",
     price: 12.99,
-    image: "/images/salmon.jpg",
+    image: "/images/misc/products/fresh-food/11091.jpg",
     category: "Fresh Food",
     rating: 4.7,
     description: "Wild-caught Atlantic salmon, rich in omega-3."
@@ -58,7 +58,7 @@ export const allProducts = [
     id: 6,
     name: "Red Apples",
     price: 4.99,
-    image: "/images/apples.jpg",
+    image: "/images/misc/products/fresh-food/271.jpg",
     category: "Fresh Food",
     rating: 4.4,
     description: "Crisp and sweet red apples."
@@ -67,7 +67,7 @@ export const allProducts = [
     id: 7,
     name: "Ground Beef",
     price: 7.99,
-    image: "/images/beef.jpg",
+    image: "/images/misc/products/fresh-food/595.jpg",
     category: "Fresh Food",
     rating: 4.1,
     description: "Lean ground beef from grass-fed cattle."
@@ -76,7 +76,7 @@ export const allProducts = [
     id: 8,
     name: "Fresh Tilapia",
     price: 9.99,
-    image: "/images/tilapia.jpg",
+    image: "/images/misc/products/fresh-food/tilapia-raw_1339-896.jpg",
     category: "Fresh Food",
     rating: 4.2,
     description: "Fresh tilapia fillets."
@@ -85,7 +85,7 @@ export const allProducts = [
     id: 9,
     name: "Brown Rice",
     price: 4.99,
-    image: "/images/rice.jpg",
+    image: "/images/misc/products/dry-food/brown-rice.png",
     category: "Dry Food",
     rating: 4.3,
     description: "Wholesome brown rice, rich in fiber."
@@ -94,7 +94,7 @@ export const allProducts = [
     id: 10,
     name: "Whole Wheat Pasta",
     price: 3.49,
-    image: "/images/pasta.jpg",
+    image: "/images/misc/products/dry-food/whole-wheat-pasta.png",
     category: "Dry Food",
     rating: 4.1,
     description: "Nutritious whole wheat pasta."
@@ -103,7 +103,7 @@ export const allProducts = [
     id: 11,
     name: "Oats",
     price: 2.99,
-    image: "/images/oats.jpg",
+    image: "/images/misc/products/dry-food/oats.jpg",
     category: "Dry Food",
     rating: 4.4,
     description: "Hearty oats for a nutritious breakfast."
@@ -112,7 +112,7 @@ export const allProducts = [
     id: 12,
     name: "Chickpeas",
     price: 1.99,
-    image: "/images/chickpeas.jpg",
+    image: "/images/misc/products/dry-food/chickpeas.jpg",
     category: "Dry Food",
     rating: 4.2,
     description: "Protein-rich chickpeas for various dishes."
@@ -121,7 +121,7 @@ export const allProducts = [
     id: 13,
     name: "Quinoa",
     price: 6.49,
-    image: "/images/quinoa.jpg",
+    image: "/images/misc/products/dry-food/quinoa.jpg",
     category: "Dry Food",
     rating: 4.6,
     description: "Superfood quinoa, packed with nutrients."
@@ -130,7 +130,7 @@ export const allProducts = [
     id: 14,
     name: "Lentils",
     price: 2.49,
-    image: "/images/lentils.jpg",
+    image: "/images/misc/products/dry-food/quinoa.jpg",
     category: "Dry Food",
     rating: 4.3,
     description: "Versatile lentils for soups and salads."
@@ -139,7 +139,7 @@ export const allProducts = [
     id: 15,
     name: "Granola",
     price: 5.99,
-    image: "/images/granola.jpg",
+    image: "/images/misc/products/dry-food/granola.jpg",
     category: "Dry Food",
     rating: 4.5,
     description: "Crunchy granola with nuts and dried fruits."
@@ -148,7 +148,7 @@ export const allProducts = [
     id: 16,
     name: "Couscous",
     price: 3.99,
-    image: "/images/couscous.jpg",
+    image: "/images/misc/products/dry-food/couscous.jpg",
     category: "Dry Food",
     rating: 4.2,
     description: "Light and fluffy couscous."
@@ -157,7 +157,7 @@ export const allProducts = [
     id: 17,
     name: "Orange Juice",
     price: 3.99,
-    image: "/images/orange-juice.jpg",
+    image: "/images/misc/products/beverages/orange-juice.jpg",
     category: "Beverages",
     rating: 4.2,
     description: "Freshly squeezed orange juice."
@@ -166,7 +166,7 @@ export const allProducts = [
     id: 18,
     name: "Green Tea",
     price: 2.49,
-    image: "/images/green-tea.jpg",
+    image: "/images/misc/products/beverages/green-tea.jpg",
     category: "Beverages",
     rating: 4.5,
     description: "Antioxidant-rich green tea."
@@ -175,7 +175,7 @@ export const allProducts = [
     id: 19,
     name: "Coca-Cola",
     price: 1.99,
-    image: "/images/coca-cola.jpg",
+    image: "/images/misc/products/beverages/coca-cola.jpg",
     category: "Beverages",
     rating: 4.0,
     description: "Classic Coca-Cola soft drink."
@@ -184,7 +184,7 @@ export const allProducts = [
     id: 20,
     name: "Coffee Beans",
     price: 12.99,
-    image: "/images/coffee-beans.jpg",
+    image: "/images/misc/products/beverages/coffee-beans.png",
     category: "Beverages",
     rating: 4.8,
     description: "Premium roasted coffee beans."
@@ -193,7 +193,7 @@ export const allProducts = [
     id: 21,
     name: "Lemonade",
     price: 2.99,
-    image: "/images/lemonade.jpg",
+    image: "/images/misc/products/beverages/lemonade.jpg",
     category: "Beverages",
     rating: 4.1,
     description: "Refreshing homemade-style lemonade."
@@ -211,7 +211,7 @@ export const allProducts = [
     id: 23,
     name: "Energy Drink",
     price: 2.99,
-    image: "/images/energy-drink.jpg",
+    image: "/images/misc/products/beverages/mineral-water.jpg",
     category: "Beverages",
     rating: 3.9,
     description: "Energizing drink for a quick boost."
@@ -220,7 +220,7 @@ export const allProducts = [
     id: 24,
     name: "Herbal Tea",
     price: 4.49,
-    image: "/images/herbal-tea.jpg",
+    image: "/images/misc/products/beverages/herbal-tea.jpg",
     category: "Beverages",
     rating: 4.3,
     description: "Soothing blend of herbal teas."
@@ -229,7 +229,7 @@ export const allProducts = [
     id: 25,
     name: "Shampoo",
     price: 6.99,
-    image: "/images/shampoo.jpg",
+    image: "/images/misc/products/hair-care/shampoo.jpg",
     category: "Hair Care",
     rating: 4.3,
     description: "Nourishing shampoo for all hair types."
@@ -238,7 +238,7 @@ export const allProducts = [
     id: 26,
     name: "Conditioner",
     price: 7.49,
-    image: "/images/conditioner.jpg",
+    image: "/images/misc/products/hair-care/conditioner.png",
     category: "Hair Care",
     rating: 4.4,
     description: "Hydrating conditioner for smooth hair."
@@ -247,7 +247,7 @@ export const allProducts = [
     id: 27,
     name: "Hair Oil",
     price: 5.99,
-    image: "/images/hair-oil.jpg",
+    image: "/images/misc/products/hair-care/hair-oil.jpg",
     category: "Hair Care",
     rating: 4.6,
     description: "Nourishing hair oil for shine and health."
@@ -256,7 +256,7 @@ export const allProducts = [
     id: 28,
     name: "Hair Spray",
     price: 4.99,
-    image: "/images/hair-spray.jpg",
+    image: "/images/misc/products/hair-care/hair-spray.png",
     category: "Hair Care",
     rating: 4.1,
     description: "Long-lasting hair spray for styling."
@@ -265,7 +265,7 @@ export const allProducts = [
     id: 29,
     name: "Hair Gel",
     price: 3.99,
-    image: "/images/hair-gel.jpg",
+    image: "/images/misc/products/hair-care/hair-gel.jpg",
     category: "Hair Care",
     rating: 4.0,
     description: "Strong hold hair gel for various styles."
@@ -274,7 +274,7 @@ export const allProducts = [
     id: 30,
     name: "Hair Mask",
     price: 8.99,
-    image: "/images/hair-mask.jpg",
+    image: "/images/misc/products/hair-care/hair-mask.jpg",
     category: "Hair Care",
     rating: 4.7,
     description: "Deep conditioning hair mask for damaged hair."
@@ -283,7 +283,7 @@ export const allProducts = [
     id: 31,
     name: "Leave-in Conditioner",
     price: 9.99,
-    image: "/images/leave-in-conditioner.jpg",
+    image: "/images/misc/products/hair-care/leave-in-conditioner.jpg",
     category: "Hair Care",
     rating: 4.5,
     description: "Lightweight leave-in conditioner for daily use."
@@ -292,7 +292,7 @@ export const allProducts = [
     id: 32,
     name: "Heat Protectant",
     price: 12.99,
-    image: "/images/heat-protectant.jpg",
+    image: "/images/misc/products/hair-care/heat-protectant.jpg",
     category: "Hair Care",
     rating: 4.8,
     description: "Protective spray for heat styling."
