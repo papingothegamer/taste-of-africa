@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight, Truck, Headphones, CreditCard } from 'lucide-react';
-import { Button } from "../components/ui/Button";
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowRight, Truck, Headphones, CreditCard, MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { Button } from "../components/ui/Button"
 
 const Homepage = () => {
   return (
@@ -134,19 +134,67 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Map Section */}
+      {/* Contact Information Section */}
       <section className="py-20">
-        <div className="container mx-auto px-4 max-w-[80%] text-center">
-          <h2 className="text-4xl font-bold mb-12">Find Us</h2>
-          <div className="relative">
-            <div style={{ height: '400px' }} className="bg-gray-300"> {/* Placeholder for the map */}
-              {/* You can replace this div with your new map library component */}
-              {/* Example: <NewMapComponent /> */}
+        <div className="container mx-auto px-4 max-w-[80%]">
+          <h2 className="text-4xl font-bold text-center mb-12">Find Us</h2>
+          <div className="bg-white p-8 rounded-lg shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <MapPin className="h-6 w-6 text-green-600 mr-2" />
+                    <p>123 African Market Street, Lodz, Poland</p>
+                  </div>
+                  <div className="flex items-center">
+                    <Phone className="h-6 w-6 text-green-600 mr-2" />
+                    <p>+48 123 456 789</p>
+                  </div>
+                  <div className="flex items-center">
+                    <Mail className="h-6 w-6 text-green-600 mr-2" />
+                    <p>info@tasteofafrica.com</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Store Hours</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center">
+                    <Clock className="h-6 w-6 text-green-600 mr-2" />
+                    <div>
+                      <p className="font-semibold">Monday - Friday:</p>
+                      <p>9:00 AM - 8:00 PM</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="h-6 w-6 text-green-600 mr-2" />
+                    <div>
+                      <p className="font-semibold">Saturday:</p>
+                      <p>10:00 AM - 6:00 PM</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="h-6 w-6 text-green-600 mr-2" />
+                    <div>
+                      <p className="font-semibold">Sunday:</p>
+                      <p>Closed</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-8 text-center">
+              <p className="text-gray-600">
+                Visit our store for a unique shopping experience and immerse yourself in the rich flavors and culture of Africa!
+              </p>
+              <Link href="https://www.google.com/maps/search/?api=1&query=123+African+Market+Street,+Lodz,+Poland" passHref>
+                  <Button className="bg-green-600 hover:bg-green-700 text-white">
+                    Get Directions
+                  </Button>
+                </Link>
             </div>
           </div>
-          <p className="mt-4 text-gray-600">
-            Come visit us at our store for a unique shopping experience!
-          </p>
         </div>
       </section>
 
@@ -168,7 +216,7 @@ const Homepage = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Homepage;
+export default Homepage
