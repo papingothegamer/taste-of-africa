@@ -2,24 +2,10 @@
 
 import React, { useState, useEffect, ReactNode } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight, ShoppingBasket, Heart, Menu, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import { Button } from "../components/ui/Button"
-
-// Type definitions for products
-type Product = {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-}
-
-type SimpleProduct = {
-  id: number;
-  name: string;
-  image: string;
-  discount?: string;
-}
+import ProductCard from '../components/ProductCard'
+import { Product, allProducts } from '@/app/productList'
 
 // Categories
 const categories = [
@@ -31,7 +17,6 @@ const categories = [
   { id: 6, name: 'Accessories', link: '/categories/accessories' },
 ]
 
-
 // Carousel items
 const carouselItems = [
   { id: 1, image: '/placeholder.svg', alt: 'Fitness Factory' },
@@ -40,7 +25,7 @@ const carouselItems = [
 ]
 
 // Products with possible discount
-const products: SimpleProduct[] = [
+const products = [
   { id: 1, name: 'Spices and Condiments', image: '/placeholder.svg', discount: 'Up to 30% off' },
   { id: 2, name: 'Clearance Sale', image: '/placeholder.svg', discount: 'Up to 30% off' },
   { id: 3, name: 'Skincare Products', image: '/placeholder.svg', discount: '' },
@@ -49,19 +34,7 @@ const products: SimpleProduct[] = [
   { id: 6, name: 'Native Foods', image: '/placeholder.svg', discount: '' },
 ]
 
-// Detailed products
-const detailedProducts: Product[] = [
-  { id: 1, name: 'African Spice Mix', category: 'Food', price: 9.99, image: '/placeholder.svg' },
-  { id: 2, name: 'Dashiki Shirt', category: 'Fashion', price: 39.99, image: '/placeholder.svg' },
-  { id: 3, name: 'Wooden Mask', category: 'Art', price: 59.99, image: '/placeholder.svg' },
-  { id: 4, name: 'Jollof Rice Mix', category: 'Food', price: 7.99, image: '/placeholder.svg' },
-  { id: 5, name: 'Ankara Fabric', category: 'Fashion', price: 24.99, image: '/placeholder.svg' },
-  { id: 6, name: 'Tribal Painting', category: 'Art', price: 89.99, image: '/placeholder.svg' },
-  { id: 7, name: 'African Coffee Beans', category: 'Food', price: 14.99, image: '/placeholder.svg' },
-  { id: 8, name: 'Beaded Necklace', category: 'Fashion', price: 29.99, image: '/placeholder.svg' },
-]
-
-// Function to shuffle arrays with a specific type
+// Function to shuffle arrays
 const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -115,6 +88,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 export default function ShopPage() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [promoProducts, setPromoProducts] = useState<Product[]>([])
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([])
+
+  useEffect(() => {
+    setPromoProducts(shuffleArray(allProducts).slice(0, 4))
+    setFeaturedProducts(shuffleArray(allProducts).slice(0, 4))
+  }, [])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselItems.length)
@@ -124,42 +104,37 @@ export default function ShopPage() {
     setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length)
   }
 
-  // Shuffle products to display
-  const promoProducts = shuffleArray(detailedProducts).slice(0, 4)
-  const featuredProducts = shuffleArray(detailedProducts).slice(0, 4)
-
   return (
-<div className="mx-auto px-4 py-8 w-full lg:w-4/5">
-  <div className="flex flex-col lg:flex-row gap-4 mb-8">
-    
-    {/* Mobile Sidebar Trigger */}
-    <Button className="lg:hidden mb-4" variant="outline" onClick={() => setIsSidebarOpen(true)}>
-      <Menu className="mr-2 h-4 w-4" /> Categories
-    </Button>
+    <div className="mx-auto px-4 py-8 w-full lg:w-4/5">
+      <div className="flex flex-col lg:flex-row gap-4 mb-8">
+        
+        {/* Mobile Sidebar Trigger */}
+        <Button className="lg:hidden mb-4" variant="outline" onClick={() => setIsSidebarOpen(true)}>
+          <Menu className="mr-2 h-4 w-4" /> Categories
+        </Button>
 
-    {/* Custom Modal for Mobile Sidebar */}
-    <Modal isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
-      <ul>
-        {categories.map((category, index) => (
-          <li key={category.id} className="mb-2 hover:text-orange-500 cursor-pointer">
-            <a href={category.link}>{category.name}</a>
-          </li>
-        ))}
-      </ul>
-    </Modal>
+        {/* Custom Modal for Mobile Sidebar */}
+        <Modal isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
+          <ul>
+            {categories.map((category) => (
+              <li key={category.id} className="mb-2 hover:text-orange-500 cursor-pointer">
+                <a href={category.link}>{category.name}</a>
+              </li>
+            ))}
+          </ul>
+        </Modal>
 
-    {/* Desktop Sidebar (visible only on large screens) */}
-    <div id="categories" className="hidden lg:block lg:w-1/5 bg-white rounded-lg shadow-md p-4">
-      <h2 className="font-bold text-lg mb-4">Categories</h2>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id} className="mb-2 hover:text-green-500 cursor-pointer">
-            <a href={category.link}>{category.name}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
-
+        {/* Desktop Sidebar (visible only on large screens) */}
+        <div id="categories" className="hidden lg:block lg:w-1/5 bg-white rounded-lg shadow-md p-4">
+          <h2 className="font-bold text-lg mb-4">Categories</h2>
+          <ul>
+            {categories.map((category) => (
+              <li key={category.id} className="mb-2 hover:text-green-500 cursor-pointer">
+                <a href={category.link}>{category.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Main Content */}
         <div className="lg:w-3/5">
@@ -205,80 +180,39 @@ export default function ShopPage() {
       </div>
 
       {/* Promos Section */}
-      <div id="promos" className="mb-8 bg-green-700 text-white p-4 rounded-lg">
-  <h2 className="text-xl font-bold mb-4">Promos Here!</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    {promoProducts.map((product) => (
-
-            <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden relative text-gray-800">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={300}
-                height={200}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-2">{product.category}</p>
-                <span className="text-xl font-bold">${product.price.toFixed(2)}</span>
-              </div>
-              <div className="absolute top-2 right-2 flex flex-col space-y-2">
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="rounded-full p-2"
-                >
-                  <Heart className="h-5 w-5 text-gray-500" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="rounded-full p-2"
-                >
-                  <ShoppingBasket className="h-5 w-5 text-gray-500" />
-                </Button>
-              </div>
-            </div>
+      <div id="promos" className="mb-8 bg-green-700 p-4 rounded-lg">
+        <h2 className="text-xl font-bold mb-4 text-white">Promos Here!</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {promoProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.image}
+              category={product.category}
+              rating={product.rating}
+              variant="category"
+            />
           ))}
         </div>
       </div>
 
       {/* Featured Products Section */}
-      <div className="mb-8 bg-orange-500 text-white p-4 rounded-lg">
-        <h2 className="text-xl font-bold mb-4">Featured Products</h2>
+      <div className="mb-8 bg-orange-500 p-4 rounded-lg">
+        <h2 className="text-xl font-bold mb-4 text-white">Featured Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {featuredProducts.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden relative text-gray-800">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={300}
-                height={200}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-2">{product.category}</p>
-                <span className="text-xl font-bold">${product.price.toFixed(2)}</span>
-              </div>
-              <div className="absolute top-2 right-2 flex flex-col space-y-2">
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="rounded-full p-2"
-                >
-                  <Heart className="h-5 w-5 text-gray-500" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="rounded-full p-2"
-                >
-                  <ShoppingBasket className="h-5 w-5 text-gray-500" />
-                </Button>
-              </div>
-            </div>
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.image}
+              category={product.category}
+              rating={product.rating}
+              variant="category"
+            />
           ))}
         </div>
       </div>

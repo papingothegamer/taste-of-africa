@@ -1,11 +1,13 @@
-'use client'
+'use client';
 
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowRight, Star, TrendingUp, Mail } from 'lucide-react'
-import { Button } from '../components/ui/Button'
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight, Star, TrendingUp, Mail } from 'lucide-react';
+import { Button } from '../components/ui/Button';
+import ProductCard from '../components/ProductCard'; // Import ProductCard
+import { Product, allProducts } from '../productList'; // Import your product list data
 
 const categories = [
   { id: 1, name: 'Fresh Food', image: '/images/misc/categories/different-vegetables-little-white-bowl-white_176474-82.jpg', link: '/categories/fresh-food' },
@@ -14,22 +16,29 @@ const categories = [
   { id: 4, name: 'Hair Care', image: '/images/misc/categories/beauty-concept_23-2147817608.jpg', link: '/categories/hair-care' },
   { id: 5, name: 'Skin Care', image: '/images/misc/categories/different-containers-dairy-produce_23-2147935435.jpg', link: '/categories/skin-care' },
   { id: 6, name: 'Accessories', image: '/images/misc/categories/glasses-cosmetics-near-stylish-makeup-bag_23-2147779029.jpg', link: '/categories/accessories' },
-]
+];
 
-const featuredProducts = [
-  { id: 1, name: 'African Black Soap', category: 'Skin Care', price: 9.99, image: '/placeholder.svg' },
-  { id: 2, name: 'Jollof Rice Mix', category: 'Dry Food', price: 5.99, image: '/placeholder.svg' },
-  { id: 3, name: 'Ankara Headwrap', category: 'Accessories', price: 15.99, image: '/placeholder.svg' },
-  { id: 4, name: 'Hibiscus Tea', category: 'Beverages', price: 7.99, image: '/placeholder.svg' },
-]
+// Utility function to get four random products
+const getRandomProducts = (productList: Product[], count: number): Product[] => {
+  const shuffled = productList.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count); // Return the first 'count' items
+};
 
 export default function CategoriesPage() {
+  const [randomProducts, setRandomProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // Fetch 4 random products from the list
+    const randomProductsFromList = getRandomProducts(allProducts, 4);
+    setRandomProducts(randomProductsFromList);
+  }, []);
+
   return (
     <div className="w-full max-w-[80%] mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Explore Our Categories</h1>
 
       {/* Hero Banner */}
-      <motion.div 
+      <motion.div
         className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg p-6 mb-12"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -74,28 +83,17 @@ export default function CategoriesPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Featured Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {featuredProducts.map((product) => (
-            <motion.div
+          {randomProducts.map((product) => (
+            <ProductCard
               key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={300}
-                height={200}
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
-                <p className="text-sm text-gray-600 mb-2">{product.category}</p>
-                <p className="text-lg font-bold mb-2">${product.price.toFixed(2)}</p>
-                <Button className="w-full bg-green-600 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Add to Cart</Button>
-              </div>
-            </motion.div>
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.image}
+              category={product.category}
+              rating={product.rating}
+              variant="category" // Use the category variant
+            />
           ))}
         </div>
       </section>
@@ -123,32 +121,34 @@ export default function CategoriesPage() {
           <h3 className="text-xl font-bold text-orange-800 mb-2">Trending Now</h3>
           <p className="text-orange-700 mb-4">Discover what's popular among our customers!</p>
           <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-            See Trending Items <TrendingUp className="ml-2 h-4 w-4" />
+            See Trending Products <TrendingUp className="ml-2 h-4 w-4" />
           </Button>
         </motion.div>
       </div>
 
-      {/* Newsletter Signup */}
-      <motion.div 
-        className="bg-gray-100 p-6 rounded-lg text-center"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+      {/* Newsletter */}
+      <motion.div
+        className="bg-indigo-600 text-white rounded-lg p-6 mb-12"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h3 className="text-xl font-bold mb-2">Stay Updated</h3>
-        <p className="mb-4">Subscribe to our newsletter for exclusive offers and updates!</p>
-        <form className="flex flex-col sm:flex-row justify-center items-center gap-2">
+        <div className="flex items-center">
+          <Mail className="h-6 w-6 text-white mr-4" />
+          <h3 className="text-xl font-semibold">Subscribe to Our Newsletter</h3>
+        </div>
+        <p className="mt-2">Stay updated with our latest products, offers, and more.</p>
+        <div className="mt-4">
           <input
             type="email"
+            className="bg-white text-gray-900 px-4 py-2 rounded-lg mr-2 w-full md:w-auto"
             placeholder="Enter your email"
-            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
-            required
           />
-          <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white rounded-l-none">
-              Subscribe <Mail className="ml-2 h-4 w-4" />
-            </Button>
-        </form>
+          <Button className="bg-white text-indigo-600 hover:bg-gray-100">
+            Subscribe
+          </Button>
+        </div>
       </motion.div>
     </div>
-  )
+  );
 }
