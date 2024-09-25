@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Heart, ShoppingBasket, Trash2, Plus, Minus } from 'lucide-react';
 import { Button } from "../components/ui/Button";
 import { useCart } from '../context/cartContext';
+import { useWishlist } from '../context/wishlistContext';
 
 interface ProductCardProps {
   id: number;
@@ -13,7 +14,7 @@ interface ProductCardProps {
   rating: number;
   variant: 'category' | 'wishlist' | 'cart';
   onAddToCart?: () => void;
-  onRemove?: () => void;
+  onRemove?: () => void;  // onRemove added for wishlist variant
   onAddToWishlist?: () => void;
   onIncreaseQuantity?: () => void;
   onDecreaseQuantity?: () => void;
@@ -36,9 +37,11 @@ export default function ProductCard({
   quantity,
 }: ProductCardProps) {
   const { addToCart } = useCart();
+  const { addToWishlist } = useWishlist();
 
+  // Handle adding to cart with a default quantity of 1
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent navigation when clicking the "Add to Cart" button
+    e.preventDefault();
     addToCart({
       id,
       name,
@@ -47,6 +50,19 @@ export default function ProductCard({
       category,
       rating,
       quantity: quantity || 1,
+    });
+  };
+
+  // Handle adding to wishlist
+  const handleAddToWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToWishlist({
+      id,
+      name,
+      price,
+      image,
+      category,
+      rating,
     });
   };
 
@@ -65,14 +81,12 @@ export default function ProductCard({
             variant="secondary"
             size="icon"
             className="absolute top-2 right-2 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100"
-            onClick={(e) => {
-              e.preventDefault();
-              onAddToWishlist && onAddToWishlist();
-            }}
+            onClick={handleAddToWishlist}
           >
             <Heart className="h-4 w-4 text-grey-500" />
           </Button>
         )}
+
         {variant === 'wishlist' && (
           <Button
             variant="secondary"
@@ -80,13 +94,14 @@ export default function ProductCard({
             className="absolute top-2 right-2 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100"
             onClick={(e) => {
               e.preventDefault();
-              onRemove && onRemove();
+              onRemove && onRemove();  // Use onRemove only if provided
             }}
           >
             <Trash2 className="h-4 w-4 text-red-500" />
           </Button>
         )}
       </Link>
+
       <div className="p-4">
         <Link href={`/product/${id}`} className="block">
           <h3 className="text-lg font-semibold mb-2 hover:text-green-600 transition-colors">{name}</h3>
@@ -138,7 +153,7 @@ export default function ProductCard({
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={onAddToWishlist}
+                onClick={handleAddToWishlist}
               >
                 <Heart className="h-5 w-5 text-gray-500" />
               </Button>

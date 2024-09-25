@@ -1,16 +1,17 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Star, Heart, Minus, Plus, ShoppingBasket } from 'lucide-react'
-import { Button } from "../../components/ui/Button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/Tabs"
-import { FilterSidebar } from "../../components/FilterSidebar"
-import { Product, allProducts } from '../../productList'
-import ProductCard from '../../components/ProductCard'
-import { useCart } from '../../context/cartContext' 
+import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Star, Heart, ShoppingBasket } from 'lucide-react';
+import { Button } from "../../components/ui/Button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/Tabs";
+import { FilterSidebar } from "../../components/FilterSidebar";
+import { Product, allProducts } from '../../productList';
+import ProductCard from '../../components/ProductCard';
+import { useCart } from '../../context/cartContext';
+import { useWishlist } from '../../context/wishlistContext'; // Import the useWishlist hook
 
 const categories = [
   { id: 1, name: 'Fresh Food', link: '/categories/fresh-food', slug: 'fresh-food' },
@@ -19,72 +20,83 @@ const categories = [
   { id: 4, name: 'Hair Care', link: '/categories/hair-care', slug: 'hair-care' },
   { id: 5, name: 'Skin Care', link: '/categories/skin-care', slug: 'skin-care' },
   { id: 6, name: 'Accessories', link: '/categories/accessories', slug: 'accessories' },
-]
+];
 
 export default function ProductPage() {
-  const { id } = useParams()
-  const [product, setProduct] = useState<Product | null>(null)
-  const [quantity, setQuantity] = useState(1)
-  const [mainImage, setMainImage] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [mainImage, setMainImage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const { addToCart } = useCart() // Get addToCart function from CartContext
+  const { addToCart } = useCart(); // Get addToCart function from CartContext
+  const { addToWishlist, wishlistItems } = useWishlist(); // Only addToWishlist is used now
 
   useEffect(() => {
     const loadProduct = async () => {
-      setIsLoading(true)
-      const productData = allProducts.find(p => p.id.toString() === id)
-      setProduct(productData || null)
+      setIsLoading(true);
+      const productData = allProducts.find(p => p.id.toString() === id);
+      setProduct(productData || null);
       if (productData) {
-        setMainImage(productData.image)
+        setMainImage(productData.image);
       }
-      setIsLoading(false)
-    }
-    loadProduct()
-  }, [id])
+      setIsLoading(false);
+    };
+    loadProduct();
+  }, [id]);
 
   const handleQuantityChange = (change: number) => {
-    setQuantity(Math.max(1, quantity + change))
-  }
+    setQuantity(Math.max(1, quantity + change));
+  };
 
   const handleAddToCart = (productToAdd?: Product) => {
     const productToLog = productToAdd || product;
     if (productToLog) {
-      addToCart({ 
-        id: productToLog.id, 
-        name: productToLog.name, 
-        price: productToLog.price, 
-        quantity, 
-        image: productToLog.image, 
-        category: productToLog.category, 
-        rating: productToLog.rating 
+      addToCart({
+        id: productToLog.id,
+        name: productToLog.name,
+        price: productToLog.price,
+        quantity,
+        image: productToLog.image,
+        category: productToLog.category,
+        rating: productToLog.rating
       });
-      console.log(`Added ${quantity} ${productToLog.name}(s) to cart`)
+      console.log(`Added ${quantity} ${productToLog.name}(s) to cart`);
     }
-  }
+  };
 
   const handleAddToWishlist = (productToAdd?: Product) => {
     const productToLog = productToAdd || product;
     if (productToLog) {
-      console.log(`Added ${productToLog.name} to wishlist`)
+      addToWishlist({
+        id: productToLog.id,
+        name: productToLog.name,
+        price: productToLog.price,
+        image: productToLog.image,
+        category: productToLog.category,
+        rating: productToLog.rating
+      });
+      console.log(`Added ${productToLog.name} to wishlist`);
     }
-  }
+  };
+
+  const isInWishlist = wishlistItems.some(item => item.id === product?.id);
 
   const handleImageChange = (index: number) => {
-    setCurrentImageIndex(index)
+    setCurrentImageIndex(index);
     const selectedProduct = allProducts.find(p => p.id.toString() === id);
     if (selectedProduct) {
       setMainImage(selectedProduct.image); // Update this based on your logic
     }
-  }
+  };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center w-full h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
       </div>
-    )
+    );
   }
 
   if (!product) {
@@ -97,12 +109,12 @@ export default function ProductPage() {
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   const relatedProducts = allProducts
     .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 4)
+    .slice(0, 4);
 
   return (
     <div className="w-full bg-gray-50">
@@ -151,13 +163,23 @@ export default function ProductPage() {
                   <span className="ml-2 text-gray-600">({product.rating})</span>
                 </div>
                 <div className="flex gap-4 mb-8">
-                  <Button className="flex-1 bg-green-600 text-white" onClick={() => handleAddToCart(product)}>
-                    <ShoppingBasket className="mr-2 h-5 w-5" /> Add to Cart
-                  </Button>
-                  <Button variant="outline" className="flex-1" onClick={() => handleAddToWishlist(product)}>
-                    <Heart className="mr-2 h-5 w-5" /> Add to Wishlist
-                  </Button>
-                </div>
+  <Button 
+    className="flex-1 bg-green-600 text-white" 
+    onClick={() => handleAddToCart(product)}
+  >
+    <ShoppingBasket className="mr-2 h-5 w-5" /> Add to Cart
+  </Button>
+
+  <Button 
+    variant={isInWishlist ? "solid" : "outline"} 
+    className="flex-1" 
+    onClick={() => handleAddToWishlist(product)}
+    disabled={isInWishlist}
+  >
+    <Heart className="mr-2 h-5 w-5" />
+    {isInWishlist ? "In Wishlist" : "Add to Wishlist"}
+  </Button>
+</div>
                 <Tabs defaultValue="description">
                   <TabsList>
                     <TabsTrigger value="description">Description</TabsTrigger>
@@ -175,25 +197,25 @@ export default function ProductPage() {
 
             {/* Related Products */}
             <div className="mt-12">
-  <h2 className="text-2xl font-bold mb-4">Related Products</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-    {relatedProducts.map((relatedProduct) => (
-      <ProductCard
-        key={relatedProduct.id}
-        id={relatedProduct.id}
-        name={relatedProduct.name}
-        price={relatedProduct.price}
-        image={relatedProduct.image}
-        rating={relatedProduct.rating}
-        category={relatedProduct.category} // Ensure 'category' is passed
-        variant='category'
-      />
-    ))}
-  </div>
-</div>
+              <h2 className="text-2xl font-bold mb-4">Related Products</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                {relatedProducts.map((relatedProduct) => (
+                  <ProductCard
+                    key={relatedProduct.id}
+                    id={relatedProduct.id}
+                    name={relatedProduct.name}
+                    price={relatedProduct.price}
+                    image={relatedProduct.image}
+                    rating={relatedProduct.rating}
+                    category={relatedProduct.category} // Ensure 'category' is passed
+                    variant='category'
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
