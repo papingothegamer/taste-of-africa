@@ -14,9 +14,6 @@ export default function Navbar() {
   const [accountOpen, setAccountOpen] = useState(false)
   const [isCartPopupVisible, setIsCartPopupVisible] = useState(false)
   const { cartItems, cartTotal } = useCart()
-  
-  // State to keep track of selected link
-  const [selectedLink, setSelectedLink] = useState("Home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,25 +140,13 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-12 space-x-8">
-            <Link 
-              href="/shop" 
-              className={`text-sm font-medium ${selectedLink === "Shop Now" ? "text-green-500" : "text-gray-700  hover:text-green-600"}`}
-              onClick={() => setSelectedLink("Shop Now")}
-            >
+            <Link href="/shop" className="text-sm font-medium text-gray-700 hover:text-green-600">
               Shop Now
             </Link>
-            <Link 
-              href="/promos" 
-              className={`text-sm font-medium ${selectedLink === "Promos" ? "text-green-500" : "text-gray-700  hover:text-green-600"}`}
-              onClick={() => setSelectedLink("Promos")}
-            >
+            <Link href="/promos" className="text-sm font-medium text-gray-700 hover:text-green-600">
               Promos
             </Link>
-            <Link 
-              href="/categories" 
-              className={`text-sm font-medium ${selectedLink === "Categories" ? "text-green-500" : "text-gray-700  hover:text-green-600"}`}
-              onClick={() => setSelectedLink("Categories")}
-            >
+            <Link href="/categories" className="text-sm font-medium text-gray-700 hover:text-green-600">
               Browse Categories
             </Link>
           </div>
