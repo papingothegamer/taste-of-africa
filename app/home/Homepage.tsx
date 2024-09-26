@@ -133,14 +133,15 @@ const Homepage = () => {
               }
             ].map((item, index) => (
               <motion.div 
-                key={index} 
-                className="bg-white p-6 rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <p className="text-gray-600 mb-4 italic">"{item.testimonial}"</p>
-                <div className="flex items-center">
+              key={index} 
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <div className="p-6 flex-grow flex flex-col">
+                <p className="text-gray-600 italic mb-4 flex-grow">"{item.testimonial}"</p>
+                <div className="flex items-center mt-auto">
                   <Image 
                     src={item.image}
                     alt={item.name} 
@@ -153,11 +154,12 @@ const Homepage = () => {
                     <p className="text-gray-600">{item.role}</p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Contact Information Section */}
       <section className="py-20 bg-white rounded-lg">
