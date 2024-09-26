@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, ReactNode } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import { Button } from "../components/ui/Button"
@@ -170,10 +171,24 @@ export default function ShopPage() {
             </button>
           </div>
         </div>
-    
-
         <div className="lg:w-1/5 bg-white rounded-lg shadow-md p-4">
-          <Image src="/placeholder.svg" alt="Promotional Banner" width={300} height={400} className="w-full rounded-lg" />
+        <Image 
+    src="/images/misc/black-friday-elements-arrangement_23-2149074054.jpg" 
+    alt="Promotional Banner" 
+    width={300} 
+    height={400} 
+    className="w-full rounded-lg" 
+  />
+  <p className="mt-4 text-center text-sm font-medium text-gray-700">
+    Don't miss our exclusive Black Friday deals! Enjoy discounts on all accessories.
+  </p>
+
+  {/* Linked Button */}
+  <div className="mt-8 text-center">
+    <Link href="/promos" className="inline-block bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition duration-300">
+      View All Promos
+    </Link>
+  </div>
         </div>
       </div>
 
