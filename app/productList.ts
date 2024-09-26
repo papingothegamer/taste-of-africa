@@ -202,7 +202,7 @@ export const allProducts = [
     id: 22,
     name: "Mineral Water",
     price: 0.99,
-    image: "/images/mineral-water.jpg",
+    image: "/images/misc/products/beverages/mineral-water.jpg",
     category: "Beverages",
     rating: 4.0,
     description: "Pure mineral water from natural springs."
@@ -211,7 +211,7 @@ export const allProducts = [
     id: 23,
     name: "Energy Drink",
     price: 2.99,
-    image: "/images/misc/products/beverages/mineral-water.jpg",
+    image: "/images/misc/products/beverages/energy-drink.jpg",
     category: "Beverages",
     rating: 3.9,
     description: "Energizing drink for a quick boost."
@@ -301,7 +301,7 @@ export const allProducts = [
     id: 33,
     name: "Facial Cleanser",
     price: 6.99,
-    image: "/images/facial-cleanser.jpg",
+    image: "/images/misc/products/skin-care/face-cleanser.jpg",
     category: "Skin Care",
     rating: 4.5,
     description: "Gentle facial cleanser for all skin types."
@@ -310,7 +310,7 @@ export const allProducts = [
     id: 34,
     name: "Moisturizer",
     price: 8.99,
-    image: "/images/moisturizer.jpg",
+    image: "/images/misc/products/skin-care/moisturizer.jpg",
     category: "Skin Care",
     rating: 4.7,
     description: "Hydrating moisturizer for soft skin."
@@ -319,7 +319,7 @@ export const allProducts = [
     id: 35,
     name: "Sunscreen",
     price: 9.99,
-    image: "/images/sunscreen.jpg",
+    image: "/images/misc/products/skin-care/sunscreen.jpg",
     category: "Skin Care",
     rating: 4.8,
     description: "Broad-spectrum sunscreen for daily use."
@@ -328,7 +328,7 @@ export const allProducts = [
     id: 36,
     name: "Face Mask",
     price: 5.99,
-    image: "/images/face-mask.jpg",
+    image: "/images/misc/products/skin-care/facial-mask.jpg",
     category: "Skin Care",
     rating: 4.4,
     description: "Rejuvenating face mask for glowing skin."
@@ -337,7 +337,7 @@ export const allProducts = [
     id: 37,
     name: "Eye Cream",
     price: 11.99,
-    image: "/images/eye-cream.jpg",
+    image: "/images/misc/products/skin-care/eye-cream.jpg",
     category: "Skin Care",
     rating: 4.6,
     description: "Nourishing eye cream for delicate eye area."
@@ -346,7 +346,7 @@ export const allProducts = [
     id: 38,
     name: "Exfoliator",
     price: 7.99,
-    image: "/images/exfoliator.jpg",
+    image: "/images/misc/products/skin-care/exfoliator.jpg",
     category: "Skin Care",
     rating: 4.3,
     description: "Gentle exfoliating scrub for smooth skin."
@@ -355,7 +355,7 @@ export const allProducts = [
     id: 39,
     name: "Toner",
     price: 6.49,
-    image: "/images/toner.jpg",
+    image: "/images/misc/products/skin-care/toner.jpg",
     category: "Skin Care",
     rating: 4.2,
     description: "Balancing toner for refreshed skin."
@@ -364,7 +364,7 @@ export const allProducts = [
     id: 40,
     name: "Serum",
     price: 15.99,
-    image: "/images/serum.jpg",
+    image: "/images/misc/products/skin-care/serum.jpg",
     category: "Skin Care",
     rating: 4.9,
     description: "Concentrated serum for targeted skincare."
@@ -373,7 +373,7 @@ export const allProducts = [
     id: 41,
     name: "Sunglasses",
     price: 14.99,
-    image: "/images/sunglasses.jpg",
+    image: "/images/misc/products/accessories/sunglasses_1203-7882.jpg",
     category: "Accessories",
     rating: 4.2,
     description: "Stylish sunglasses for UV protection."
@@ -382,7 +382,7 @@ export const allProducts = [
     id: 42,
     name: "Watch",
     price: 25.99,
-    image: "/images/watch.jpg",
+    image: "/images/misc/products/accessories/watch.jpg",
     category: "Accessories",
     rating: 4.6,
     description: "Elegant watch for everyday wear."
@@ -391,7 +391,7 @@ export const allProducts = [
     id: 43,
     name: "Necklace",
     price: 9.99,
-    image: "/images/necklace.jpg",
+    image: "/images/misc/products/accessories/necklace.jpg",
     category: "Accessories",
     rating: 4.3,
     description: "Delicate necklace for a touch of elegance."
@@ -400,7 +400,7 @@ export const allProducts = [
     id: 44,
     name: "Bracelet",
     price: 5.49,
-    image: "/images/bracelet.jpg",
+    image: "/images/misc/products/accessories/bracelet.jpg",
     category: "Accessories",
     rating: 4.1,
     description: "Charming bracelet to complement any outfit."
@@ -409,7 +409,7 @@ export const allProducts = [
     id: 45,
     name: "Belt",
     price: 7.99,
-    image: "/images/belt.jpg",
+    image: "/images/misc/products/accessories/belt.jpg",
     category: "Accessories",
     rating: 4.0,
     description: "Versatile belt for casual and formal wear."
@@ -418,7 +418,7 @@ export const allProducts = [
     id: 46,
     name: "Earrings",
     price: 3.99,
-    image: "/images/earrings.jpg",
+    image: "/images/misc/products/accessories/earrings.jpg",
     category: "Accessories",
     rating: 4.4,
     description: "Stylish earrings for everyday elegance."
@@ -427,7 +427,7 @@ export const allProducts = [
     id: 47,
     name: "Hat",
     price: 12.99,
-    image: "/images/hat.jpg",
+    image: "/images/misc/products/accessories/hat.jpg",
     category: "Accessories",
     rating: 4.2,
     description: "Trendy hat for sun protection and style."
@@ -436,7 +436,7 @@ export const allProducts = [
     id: 48,
     name: "Wallet",
     price: 19.99,
-    image: "/images/wallet.jpg",
+    image: "/images/misc/products/accessories/wallet.jpg",
     category: "Accessories",
     rating: 4.5,
     description: "Durable and stylish wallet for everyday use."
