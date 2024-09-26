@@ -7,7 +7,7 @@ import { Button } from "../components/ui/Button"
 import ProductCard from '../components/ProductCard'
 import { Product, allProducts } from '@/app/productList'
 
-// Categories
+
 const categories = [
   { id: 1, name: 'Fresh Food', link: '/categories/fresh-food' },
   { id: 2, name: 'Dry Food', link: '/categories/dry-food' },
@@ -17,24 +17,23 @@ const categories = [
   { id: 6, name: 'Accessories', link: '/categories/accessories' },
 ]
 
-// Carousel items
 const carouselItems = [
-  { id: 1, image: '/placeholder.svg', alt: 'Fitness Factory' },
-  { id: 2, image: '/placeholder.svg', alt: 'Electronics Sale' },
-  { id: 3, image: '/placeholder.svg', alt: 'Fashion Deals' },
+  { id: 1, image: '/images/misc/african-american-woman-with-shopping-cart-trolley-supermarket-store-speak-mobile-phone_627829-643.jpg', alt: 'Fitness Factory' },
+  { id: 2, image: '/images/misc/Header IMG.png', alt: 'Electronics Sale' },
+  { id: 3, image: '/images/misc/freepik-export-20240914172041Id5V.jpeg', alt: 'Fashion Deals' },
 ]
 
-// Products with possible discount
+
 const products = [
-  { id: 1, name: 'Spices and Condiments', image: '/placeholder.svg', discount: 'Up to 30% off' },
-  { id: 2, name: 'Clearance Sale', image: '/placeholder.svg', discount: 'Up to 30% off' },
-  { id: 3, name: 'Skincare Products', image: '/placeholder.svg', discount: '' },
-  { id: 4, name: 'Groceries', image: '/placeholder.svg', discount: '' },
-  { id: 5, name: 'Beverages', image: '/placeholder.svg', discount: '' },
-  { id: 6, name: 'Native Foods', image: '/placeholder.svg', discount: '' },
+  { id: 1, name: 'Spices and Condiments', image: '/images/misc/high-angle-asian-food-ingredients-with-copy-space_23-2148377383.jpg', discount: 'Up to 30% off' },
+  { id: 2, name: 'Clearance Sale', image: '/images/misc/black-friday-elements-arrangement_23-2149074054.jpg', discount: 'Up to 30% off' },
+  { id: 3, name: 'Skincare Products', image: '/images/misc/top-view-bath-concept-with-copy-space_23-2148459831.jpg', discount: '' },
+  { id: 4, name: 'Groceries', image: '/images/misc/top-view-delicious-groceries-paper-bag_23-2149139455.jpg', discount: '' },
+  { id: 5, name: 'Beverages', image: '/images/misc/fresh-fruit-jugs-with-straws_23-2148037150.jpg', discount: ' Up to 20% off on Cocktails' },
+  { id: 6, name: 'Native Foods', image: '/images/misc/chili-paste-is-served-banana-leaves-plate-with-long-beans-lime-chili-eggplant_1150-25959.jpg', discount: '' },
 ]
 
-// Function to shuffle arrays
+
 const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -44,7 +43,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled;
 }
 
-// Modal component
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -124,7 +123,7 @@ export default function ShopPage() {
           </ul>
         </Modal>
 
-        {/* Desktop Sidebar (visible only on large screens) */}
+
         <div id="categories" className="hidden lg:block lg:w-1/5 bg-white rounded-lg shadow-md p-4">
           <h2 className="font-bold text-lg mb-4">Categories</h2>
           <ul>
@@ -136,25 +135,43 @@ export default function ShopPage() {
           </ul>
         </div>
 
-        {/* Main Content */}
+ 
         <div className="lg:w-3/5">
-          {/* Carousel */}
           <div className="relative rounded-lg overflow-hidden mb-4">
-            <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-              {carouselItems.map((item) => (
-                <Image key={item.id} src={item.image} alt={item.alt} width={800} height={400} className="w-full" />
+            <div className="relative w-full h-[400px]">
+              {carouselItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out ${
+                    index === currentSlide ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  style={{ pointerEvents: index === currentSlide ? 'auto' : 'none' }}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
               ))}
             </div>
-            <button onClick={prevSlide} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2">
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200"
+            >
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <button onClick={nextSlide} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2">
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200"
+            >
               <ChevronRight className="w-6 h-6" />
             </button>
           </div>
         </div>
+    
 
-        {/* Right Sidebar */}
         <div className="lg:w-1/5 bg-white rounded-lg shadow-md p-4">
           <Image src="/placeholder.svg" alt="Promotional Banner" width={300} height={400} className="w-full rounded-lg" />
         </div>

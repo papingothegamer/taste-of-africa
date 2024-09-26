@@ -10,10 +10,10 @@ import ProductCard from '../components/ProductCard';
 import { Product, allProducts } from '@/app/productList';
 
 const promos = [
-  { id: 1, name: 'Summer Sale', image: '/images/promos/summer-sale.jpg', discount: '20% OFF', endDate: '2023-08-31' },
-  { id: 2, name: 'Back to School', image: '/images/promos/back-to-school.jpg', discount: '15% OFF', endDate: '2023-09-15' },
-  { id: 3, name: 'Clearance', image: '/images/promos/clearance.jpg', discount: 'Up to 50% OFF', endDate: '2023-07-31' },
-  { id: 4, name: 'New Customer', image: '/images/promos/new-customer.jpg', discount: '10% OFF', endDate: '2023-12-31' },
+  { id: 1, name: 'Summer Sale', image: '/images/misc/woman-shopping-vegetables-supermarket_1157-37859.jpg', discount: '20% OFF', endDate: '2023-08-31' },
+  { id: 2, name: 'Back to School', image: '/images/misc/kids-getting-back-school-together_23-2149507595.avif', discount: '15% OFF', endDate: '2023-09-15' },
+  { id: 3, name: 'Clearance', image: '/images/misc/fresh-fruit-jugs-with-straws_23-2148037150.jpg', discount: 'Up to 50% OFF', endDate: '2023-07-31' },
+  { id: 4, name: 'New Customer', image: '/images/misc/organic-food-modern-supermarket_482257-76136.jpg', discount: '10% OFF', endDate: '2023-12-31' },
 ];
 
 const getRandomProducts = (productList: Product[], count: number): Product[] => {
