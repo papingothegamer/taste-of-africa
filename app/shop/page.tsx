@@ -180,7 +180,7 @@ export default function ShopPage() {
     className="w-full rounded-lg" 
   />
   <p className="mt-4 text-center text-sm font-medium text-gray-700">
-    Don't miss our exclusive Black Friday deals! Enjoy discounts on all accessories.
+    Don&apos;t miss our exclusive Black Friday deals! Enjoy discounts on all accessories.
   </p>
 
   {/* Linked Button */}

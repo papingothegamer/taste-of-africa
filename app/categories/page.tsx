@@ -119,7 +119,7 @@ export default function CategoriesPage() {
           transition={{ duration: 0.5 }}
         >
           <h3 className="text-xl font-bold text-orange-800 mb-2">Trending Now</h3>
-          <p className="text-orange-700 mb-4">Discover what's popular among our customers!</p>
+          <p className="text-orange-700 mb-4">Discover what&apos;s popular among our customers!</p>
           <Button className="bg-orange-500 hover:bg-orange-600 text-white">
             See Trending Products <TrendingUp className="ml-2 h-4 w-4" />
           </Button>

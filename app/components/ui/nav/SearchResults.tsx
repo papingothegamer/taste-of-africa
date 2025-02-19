@@ -69,7 +69,7 @@ export default function SearchResults({ query, products, isVisible, onClose }: S
             <div className="p-4">
               {filteredProducts.length === 0 && suggestedCategories.length === 0 ? (
                 <div className="text-center py-4">
-                  <p className="text-gray-500">No results found for "{query}"</p>
+                  <p className="text-gray-500">No results found for &quot;{query}&quot;</p>
                 </div>
               ) : (
                 <div className="space-y-6">

@@ -39,7 +39,7 @@ export default function AccessoriesCategory() {
   )
   const maxPrice = useMemo(() => 
     Math.max(...accessoriesProducts.map(p => p.price)),
-    []
+    [accessoriesProducts]
   );
 
   const filteredProducts = accessoriesProducts.filter(product => 

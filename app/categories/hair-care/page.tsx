@@ -41,7 +41,7 @@ export default function HairCareCategory() {
 
   const maxPrice = useMemo(() => 
     Math.max(...hairCareProducts.map(p => p.price)),
-    []
+    [hairCareProducts]
   )
 
   const filteredProducts = hairCareProducts.filter(product => 

@@ -6,7 +6,7 @@ import { useCart } from '../context/cartContext';
 import { useWishlist } from '../context/wishlistContext';
 
 interface ProductCardProps {
-  id: string;
+  id: string | number;
   name: string;
   price: number;
   image: string;

@@ -87,7 +87,7 @@ const Homepage = () => {
                   </div>
                   <h3 className="text-2xl font-semibold mb-2 text-center">{category.name}</h3>
                   <p className="text-gray-600 mb-4 text-center">
-                    Explore authentic {category.name.toLowerCase()} from different regions of Africa.
+                    &quot;Explore authentic {category.name.toLowerCase()} from different regions of Africa.&quot;
                   </p>
                   <Link href={`/categories`}>
                     <Button variant="outline" className="w-full group rounded-full">

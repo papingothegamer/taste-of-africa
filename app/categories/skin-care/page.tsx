@@ -40,7 +40,7 @@ export default function SkinCareCategory() {
 
   const maxPrice = useMemo(() => 
     Math.max(...skinCareProducts.map(p => p.price)),
-    []
+    [skinCareProducts]
   )
 
   const filteredProducts = skinCareProducts.filter(product => 
