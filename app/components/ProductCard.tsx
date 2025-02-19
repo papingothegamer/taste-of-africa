@@ -69,11 +69,14 @@ export default function ProductCard({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <Link href={`/product/${id}`} className="block relative">
-        <Image
+      <Image
           src={image}
           alt={name}
           width={250}
           height={200}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
           className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
         />
         {variant === 'category' && (

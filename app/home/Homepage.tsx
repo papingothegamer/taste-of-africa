@@ -37,7 +37,7 @@ const Homepage = () => {
           </p>
           <Link href="/shop" passHref>
             <Button size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded-full">
-              Shop Now <ArrowRight className="ml-2 h-5 w-5" />
+              Shop Now 
             </Button>
           </Link>
         </motion.div>
@@ -242,7 +242,7 @@ const Homepage = () => {
               placeholder="Enter your email" 
               className="flex-grow px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-800"
             />
-            <Button type="submit" className="bg-yellow-400 text-black font-semibold hover:bg-yellow-500 rounded-full">
+            <Button type="submit" className="bg-yellow-400 text-black font-semibold hover:bg-yellow-500 rounded-full ">
               Subscribe
             </Button>
           </form>

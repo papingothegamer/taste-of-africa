@@ -8,12 +8,14 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Input } from "../input/SearchBar"
 import { Button } from "../Button"
 import { useCart } from "../../../context/cartContext"
+import { useAuth } from "../../../context/authContext"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
   const [isCartPopupVisible, setIsCartPopupVisible] = useState(false)
   const { cartItems, cartTotal } = useCart()
+  const { user, logout } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +24,11 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleLogout = () => {
+    logout();
+    setAccountOpen(false);
+  };
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm">
@@ -47,29 +54,56 @@ export default function Navbar() {
                 onClick={() => setAccountOpen(!accountOpen)}
               >
                 <User className="h-5 w-5" />
-                <span className="hidden md:inline">Your Account</span>
+                <span className="hidden md:inline">
+                  {user ? user.name : "Account"}
+                </span>
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${accountOpen ? "rotate-180" : ""}`} />
               </Button>
               <AnimatePresence>
                 {accountOpen && (
                   <motion.div
-                    className="absolute left-0 mt-2 w-[calc(100%+2rem)] bg-white rounded-md shadow-lg py-1"
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="flex flex-col items-center">
-                      <Link href="/account/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center">
-                        Login
-                      </Link>
-                      <Link href="/account/sign-up" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center">
-                        Sign Up
-                      </Link>
-                      <Link href="/account/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center">
-                        Profile
-                      </Link>
-                    </div>
+                    {user ? (
+                      // Authenticated state
+                      <div className="flex flex-col items-stretch">
+                        <Link 
+                          href="/account/profile" 
+                          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setAccountOpen(false)}
+                        >
+                          Profile
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    ) : (
+                      // Unauthenticated state
+                      <div className="flex flex-col items-stretch">
+                        <Link 
+                          href="/account/login" 
+                          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setAccountOpen(false)}
+                        >
+                          Login
+                        </Link>
+                        <Link 
+                          href="/account/sign-up" 
+                          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setAccountOpen(false)}
+                        >
+                          Sign Up
+                        </Link>
+                      </div>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

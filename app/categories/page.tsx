@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, TrendingUp, Mail } from 'lucide-react';
+import { ArrowDown, ArrowRight, Star, TrendingUp, Mail } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import ProductCard from '../components/ProductCard'; // Import ProductCard
 import { Product, allProducts } from '../productList'; // Import your product list data
@@ -47,7 +47,7 @@ export default function CategoriesPage() {
         <h2 className="text-2xl font-bold mb-4">Discover the Richness of Africa</h2>
         <p className="mb-6">Explore our wide range of authentic African products and bring the essence of the continent to your doorstep.</p>
         <Button className="bg-white text-indigo-600 hover:bg-gray-100">
-          Start Shopping <ArrowRight className="ml-2 h-4 w-4" />
+          Start Shopping <ArrowDown className="ml-2 h-4 w-4" />
         </Button>
       </motion.div>
 
@@ -144,7 +144,7 @@ export default function CategoriesPage() {
             className="bg-white text-gray-900 px-4 py-2 rounded-lg mr-2 w-full md:w-auto"
             placeholder="Enter your email"
           />
-          <Button className="bg-white text-indigo-600 hover:bg-gray-100">
+          <Button className="bg-white text-indigo-600 hover:bg-gray-100 mt-2">
             Subscribe
           </Button>
         </div>
