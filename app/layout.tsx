@@ -6,6 +6,7 @@ import Footer from './components/ui/footer/Footer'
 import { CartProvider } from './context/cartContext'
 import { WishlistProvider } from './context/wishlistContext';
 import { AuthProvider } from './context/authContext';
+import { OrderProvider } from './context/orderContext';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] })
 
@@ -25,11 +26,13 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             <WishlistProvider>
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-grow">{children}</main>
-                <Footer />
-              </div>
+              <OrderProvider>
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow">{children}</main>
+                  <Footer />
+                </div>
+              </OrderProvider>
             </WishlistProvider>
           </CartProvider>
         </AuthProvider>

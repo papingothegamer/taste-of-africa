@@ -79,7 +79,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/order-history" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/account/profile" className="text-gray-600 hover:text-gray-800">
                                     Order History
                                 </Link>
                             </li>
@@ -89,7 +89,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/account" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/account/profile" className="text-gray-600 hover:text-gray-800">
                                     Account
                                 </Link>
                             </li>

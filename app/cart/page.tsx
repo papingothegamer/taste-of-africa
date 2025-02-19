@@ -5,9 +5,11 @@ import ProductCard from '../components/ProductCard';
 import { Button } from '../components/ui/Button';
 import { ShoppingBasket, ArrowRight, Truck } from 'lucide-react';
 import Link from 'next/link'; // Import the Link component from Next.js
+import { useRouter } from 'next/navigation';
 
 export default function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, cartTotal } = useCart();
+  const router = useRouter();
 
   return (
     <div className="w-full bg-gray-50 py-12">
@@ -74,7 +76,10 @@ export default function CartPage() {
                   <span>${cartTotal.toFixed(2)}</span>
                 </div>
               </div>
-              <Button className="w-full py-3 bg-green-600 text-white text-lg font-semibold hover:bg-green-700 transition-colors duration-200 flex items-center justify-center">
+              <Button 
+                className="w-full py-3 bg-green-600 text-white text-lg font-semibold hover:bg-green-700 transition-colors duration-200 flex items-center justify-center"
+                onClick={() => router.push('/payment/checkout')}
+              >
                 Proceed to Checkout
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

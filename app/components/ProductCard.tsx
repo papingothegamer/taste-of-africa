@@ -6,7 +6,7 @@ import { useCart } from '../context/cartContext';
 import { useWishlist } from '../context/wishlistContext';
 
 interface ProductCardProps {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -43,13 +43,12 @@ export default function ProductCard({
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     addToCart({
-      id,
+      id: id.toString(),
       name,
       price,
       image,
       category,
-      rating,
-      quantity: quantity || 1,
+      rating
     });
   };
 
@@ -57,12 +56,12 @@ export default function ProductCard({
   const handleAddToWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     addToWishlist({
-      id,
+      id: id.toString(),
       name,
       price,
       image,
       category,
-      rating,
+      rating
     });
   };
 

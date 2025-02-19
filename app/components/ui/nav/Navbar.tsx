@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronDown, Heart, ShoppingBasket, Search, User } from "lucide-react"
@@ -9,6 +9,8 @@ import { Input } from "../input/SearchBar"
 import { Button } from "../Button"
 import { useCart } from "../../../context/cartContext"
 import { useAuth } from "../../../context/authContext"
+import SearchResults from './SearchResults'
+import { allProducts } from '@/app/productList'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -16,6 +18,9 @@ export default function Navbar() {
   const [isCartPopupVisible, setIsCartPopupVisible] = useState(false)
   const { cartItems, cartTotal } = useCart()
   const { user, logout } = useAuth()
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +29,20 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Add click outside listener
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSearchResults(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -40,10 +59,26 @@ export default function Navbar() {
               <Image src="/images/logo/logo.png" alt="Taste of Africa Logo" width={40} height={40} />
             </Link>
           </div>
-          <div className="flex-1 max-w-2xl mx-4">
-            <div className="relative hidden md:block">
-              <Input type="text" placeholder="Search products..." className="w-full pl-10 pr-4" />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+          <div className="flex-1 max-w-2xl mx-4" ref={searchRef}>
+            <div className="relative">
+              <Input
+                type="text"
+                placeholder="Search products..."
+                className="w-full pl-10 pr-4"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setShowSearchResults(true)}
+              />
+              <Search 
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                size={20} 
+              />
+              <SearchResults
+                query={searchQuery}
+                products={allProducts}
+                isVisible={showSearchResults}
+                onClose={() => setShowSearchResults(false)}
+              />
             </div>
           </div>
           <div className="flex items-center space-x-4">
