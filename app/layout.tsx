@@ -4,15 +4,24 @@ import { Inter } from 'next/font/google'
 import Navbar from './components/ui/nav/Navbar';
 import Footer from './components/ui/footer/Footer'
 import { CartProvider } from './context/cartContext'
-import { WishlistProvider } from './context/wishlistContext';
-import { AuthProvider } from './context/authContext';
-import { OrderProvider } from './context/orderContext';
+import { WishlistProvider } from './context/wishlistContext'
+import { AuthProvider } from './context/authContext'
+import { OrderProvider } from './context/orderContext'
 
-const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Taste Of Africa',
-  description: 'Web shop for African goods in Lodz.',
+  title: 'Taste of Africa',
+  description: 'African cuisine at your doorstep',
+  icons: {
+    icon: '/3.ico',
+    shortcut: '/3.ico',
+    apple: '/3.ico',
+    other: {
+      rel: 'apple-touch-icon-precomposed',
+      url: '/3.ico',
+    },
+  },
 }
 
 export default function RootLayout({
@@ -22,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={'${inter.className} text-slate-700'}>
+      <body className={inter.className}>
         <AuthProvider>
           <CartProvider>
             <WishlistProvider>
