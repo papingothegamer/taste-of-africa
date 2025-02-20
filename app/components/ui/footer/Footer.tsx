@@ -25,22 +25,22 @@ export default function Footer() {
                         <h3 className="text-lg font-semibold mb-4">About Us</h3>
                         <ul className="space-y-2">
                             <li>
-                                <Link href="/contact-us" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Contact Us
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/shipping" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Shipping
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/returns" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Returns
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/track-order" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Track Order
                                 </Link>
                             </li>
@@ -52,17 +52,17 @@ export default function Footer() {
                         <h3 className="text-lg font-semibold mb-4">Terms & Conditions</h3>
                         <ul className="space-y-2">
                             <li>
-                                <Link href="/privacy-policy" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/shipping-policy" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Shipping Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/return-policy" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     Return Policy
                                 </Link>
                             </li>
@@ -74,7 +74,7 @@ export default function Footer() {
                         <h3 className="text-lg font-semibold mb-4">Help Center</h3>
                         <ul className="space-y-2">
                             <li>
-                                <Link href="/faqs" className="text-gray-600 hover:text-gray-800">
+                                <Link href="/" className="text-gray-600 hover:text-gray-800">
                                     FAQs
                                 </Link>
                             </li>
@@ -132,15 +132,15 @@ export default function Footer() {
                 <div className="mt-12 pt-8 border-t border-gray-100">  
                          {/* Social Media Icons */}
                         <div className="flex justify-center space-x-6 mb-4">
-                            <Link href="#" className="text-gray-400 hover:text-gray-500">
+                            <Link href="https://facebook.com/tasteofafrica" className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Facebook</span>
                                 <Facebook className="h-6 w-6" />
                             </Link>
-                            <Link href="#" className="text-gray-400 hover:text-gray-500">
+                            <Link href="https://instagram.com/tasteofafrica" className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Instagram</span>
                                 <Instagram className="h-6 w-6" />
                             </Link>
-                            <Link href="#" className="text-gray-400 hover:text-gray-500">
+                            <Link href="https://twitter.com/tasteofafrica" className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Twitter</span>
                                 <Twitter className="h-6 w-6" />
                             </Link>

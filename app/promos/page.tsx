@@ -42,9 +42,11 @@ export default function PromosPage() {
       >
         <h2 className="text-2xl font-bold mb-4">Exclusive Deals Just for You!</h2>
         <p className="mb-6">Don't miss out on our limited-time offers. Shop now and save big on your favorite African products.</p>
-        <Button className="bg-white text-orange-600 hover:bg-gray-100">
-          View All Deals <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        <Link href="/">
+          <Button className="bg-white text-orange-600 hover:bg-gray-100">
+            View All Deals <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
       </motion.div>
 
       {/* Promos Grid */}
@@ -106,9 +108,11 @@ export default function PromosPage() {
         >
           <h3 className="text-xl font-bold text-purple-800 mb-2">Flash Sales</h3>
           <p className="text-purple-700 mb-4">Limited-time offers on select items. Act fast!</p>
-          <Button className="bg-purple-500 hover:bg-purple-600 text-white">
-            Shop Flash Sales <Star className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/">
+            <Button className="bg-purple-500 hover:bg-purple-600 text-white">
+              Shop Flash Sales <Star className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
         <motion.div 
           className="bg-blue-100 border-l-4 border-blue-500 p-6 rounded-lg"
@@ -118,9 +122,11 @@ export default function PromosPage() {
         >
           <h3 className="text-xl font-bold text-blue-800 mb-2">Bulk Discounts</h3>
           <p className="text-blue-700 mb-4">Save more when you buy more. Check out our bulk offers!</p>
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-            View Bulk Deals <Percent className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/">
+            <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+              View Bulk Deals <Percent className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
 

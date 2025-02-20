@@ -108,9 +108,11 @@ export default function CategoriesPage() {
         >
           <h3 className="text-xl font-bold text-green-800 mb-2">New Arrivals</h3>
           <p className="text-green-700 mb-4">Check out our latest products from across Africa!</p>
-          <Button className="bg-green-500 hover:bg-green-600 text-white">
-            View New Arrivals <Star className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/">
+            <Button className="bg-green-500 hover:bg-green-600 text-white">
+              View New Arrivals <Star className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
         <motion.div 
           className="bg-orange-100 border-l-4 border-orange-500 p-6 rounded-lg"
@@ -120,9 +122,11 @@ export default function CategoriesPage() {
         >
           <h3 className="text-xl font-bold text-orange-800 mb-2">Trending Now</h3>
           <p className="text-orange-700 mb-4">Discover what&apos;s popular among our customers!</p>
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-            See Trending Products <TrendingUp className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/">
+            <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+              See Trending Products <TrendingUp className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
 
