@@ -46,4 +46,5 @@ declare module 'lucide-react' {
   export const Clock: FC<IconProps>;
   export const ChevronLeft: FC<IconProps>;
   export const Percent: FC<IconProps>;
+  export const TriangleAlert: FC<IconProps>;
 }

@@ -9,11 +9,12 @@ import { useWishlist } from "../../context/wishlistContext"
 import { useCart } from "../../context/cartContext"
 import { useOrders } from "../../context/orderContext"
 import { Button } from "../../components/ui/Button"
-import { User as UserIcon, ShoppingBasket, Heart, LogOut, AlertTriangle, CreditCard, Plus, Trash2 } from "lucide-react"
+import { User as UserIcon, ShoppingBasket, Heart, LogOut, TriangleAlert, CreditCard, Plus, Trash2 } from "lucide-react"
 import ProductCard from "../../components/ProductCard"
 import { motion, AnimatePresence } from "framer-motion"
 import type { User, PaymentMethod, UserAddress, Order, OrderItem } from "@/lib/types/user"
 import Image from "next/image"
+
 
 interface ExtendedFormData {
   name: string
@@ -666,7 +667,7 @@ export default function ProfilePage() {
               >
                 <div className="p-6">
                   <div className="flex items-center justify-center mb-6 text-red-600">
-                    <AlertTriangle size={48} />
+                    <TriangleAlert size={48} />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 text-center mb-3">Delete Account</h3>
                   <p className="text-sm text-gray-500 text-center mb-8">
