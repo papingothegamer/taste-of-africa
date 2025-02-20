@@ -4,23 +4,28 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './authContext';
 
 interface WishlistItem {
-  id: string;
+  id: string | number;
   name: string;
   price: number;
-  image: string;
+  image?: string;
   description?: string;
-  category: string;
-  rating: number;
+  category?: string;
+  rating?: number;
 }
 
 interface WishlistContextType {
   wishlistItems: WishlistItem[];
   addToWishlist: (item: WishlistItem) => void;
-  removeFromWishlist: (itemId: string) => void;
-  isInWishlist: (itemId: string) => boolean;
+  removeFromWishlist: (id: string | number) => void;
+  isInWishlist: (id: string | number) => boolean;
 }
 
-const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
+export const WishlistContext = createContext<WishlistContextType>({
+  wishlistItems: [],
+  addToWishlist: () => {},
+  removeFromWishlist: () => {},
+  isInWishlist: () => false,
+});
 
 export function WishlistProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
@@ -45,7 +50,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const removeFromWishlist = (itemId: string) => {
+  const removeFromWishlist = (itemId: string | number) => {
     if (user) {
       const newWishlist = wishlistItems.filter(item => item.id !== itemId);
       setWishlistItems(newWishlist);
@@ -53,7 +58,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const isInWishlist = (itemId: string) => {
+  const isInWishlist = (itemId: string | number) => {
     return wishlistItems.some(item => item.id === itemId);
   };
 
