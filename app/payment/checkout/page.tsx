@@ -10,7 +10,7 @@ import { useOrders } from "../../context/orderContext"
 import { Button } from "../../components/ui/Button"
 import { motion, AnimatePresence } from "framer-motion"
 import { User, ShoppingBasket, Check, X, CreditCard } from "lucide-react"
-import type { PaymentMethod, Order } from "@/lib/types/user"
+import type { PaymentMethod, Order, OrderItem } from "@/lib/types/user"
 
 interface PaymentFormData {
   cardNumber: string
@@ -97,26 +97,36 @@ export default function CheckoutPage() {
     }
   }
 
-  const handleConfirmOrder = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const orderItems: OrderItem[] = cartItems.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image
+    }));
+
+    const defaultPaymentMethod: PaymentMethod = {
+      id: 'default',
+      type: 'card',
+      cardBrand: 'Default',
+      last4: '****',
+      expiryMonth: '**',
+      expiryYear: '****',
+      cardType: 'Default'
+    };
+
     const orderData: Order = {
       id: `order_${Date.now()}`,
-      items: cartItems,
+      items: orderItems,
       total: cartTotal,
       shippingAddress: formData.address,
-      paymentMethod: user?.paymentMethods?.find((m) => m.id === selectedPaymentMethod) ?? {
-        id: `card_${Date.now()}`,
-        type: "card" as const,
-        cardBrand: getCardBrand(isPaymentFormData(formData.paymentMethod) ? formData.paymentMethod.cardNumber : ""),
-        last4: isPaymentFormData(formData.paymentMethod) ? formData.paymentMethod.cardNumber.slice(-4) : "",
-        expiryMonth: isPaymentFormData(formData.paymentMethod)
-          ? Number.parseInt(formData.paymentMethod.expiryMonth)
-          : 0,
-        expiryYear: isPaymentFormData(formData.paymentMethod) ? Number.parseInt(formData.paymentMethod.expiryYear) : 0,
-        isDefault: false,
-      },
-      status: "pending" as const,
-      date: new Date().toISOString(),
-    }
+      paymentMethod: user?.paymentMethods?.find((m) => m.id === selectedPaymentMethod) ?? defaultPaymentMethod,
+      status: 'pending',
+      date: new Date().toISOString()
+    };
 
     await addOrder(orderData)
     clearCart()
@@ -148,6 +158,20 @@ export default function CheckoutPage() {
     }
     return ""
   }
+
+  const renderPaymentMethod = (method: PaymentMethod) => (
+    <div className="flex items-center justify-between p-4 border rounded-lg">
+      <div className="flex items-center space-x-4">
+        <CreditCard className="h-6 w-6 text-gray-500" />
+        <div>
+          <p className="font-medium">{method.cardBrand} •••• {method.last4}</p>
+          <p className="text-sm text-gray-500">
+            Expires {method.expiryMonth}/{method.expiryYear}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -383,14 +407,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setSelectedPaymentMethod(e.target.value)}
                         className="mr-4 text-green-600 focus:ring-green-500"
                       />
-                      <div>
-                        <p className="font-medium">
-                          {method.cardBrand} •••• {method.last4}
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          Expires {method.expiryMonth}/{method.expiryYear}
-                        </p>
-                      </div>
+                      {renderPaymentMethod(method)}
                     </label>
                   ))}
                 </div>
@@ -518,20 +535,15 @@ export default function CheckoutPage() {
                   <h3 className="font-medium mb-2">Payment Method</h3>
                   {user?.paymentMethods && selectedPaymentMethod ? (
                     <div>
-                      {(() => {
-                        const method = user.paymentMethods.find((m) => m.id === selectedPaymentMethod)
-                        return method ? (
-                          <p>
-                            {method.cardBrand} •••• {method.last4}
-                          </p>
-                        ) : null
-                      })()}
+                      {renderPaymentMethod(user.paymentMethods.find((m) => m.id === selectedPaymentMethod) as PaymentMethod)}
                     </div>
                   ) : (
-                    <p>
-                      {isPaymentFormData(formData.paymentMethod) &&
-                        `Card ending in ${formData.paymentMethod.cardNumber.slice(-4)}`}
-                    </p>
+                    <div className="payment-method-display">
+                      <p className="text-sm text-gray-600">
+                        {isPaymentFormData(formData.paymentMethod) &&
+                          `Card ending in ${formData.paymentMethod.cardNumber.slice(-4)}`}
+                      </p>
+                    </div>
                   )}
                 </div>
                 <div className="text-xl font-semibold flex justify-between">
@@ -580,7 +592,7 @@ export default function CheckoutPage() {
                     <Button onClick={() => setShowConfirmModal(false)} variant="outline" className="w-full sm:w-auto">
                       Cancel
                     </Button>
-                    <Button onClick={handleConfirmOrder} className="w-full sm:w-auto">
+                    <Button onClick={handleSubmit} className="w-full sm:w-auto">
                       Confirm
                     </Button>
                   </div>

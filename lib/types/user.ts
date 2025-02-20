@@ -8,30 +8,30 @@ export interface UserAddress {
 
 export interface PaymentMethod {
   id: string;
-  type: 'card';
-  cardBrand: string;
-  last4: string;
-  expiryMonth: number;
-  expiryYear: number;
-  isDefault: boolean;
+  type: 'card' | 'paypal' | 'bank';
+  cardBrand?: string;
+  last4?: string;
+  expiryMonth?: string;
+  expiryYear?: string;
+  cardType?: string;
 }
 
 export interface OrderItem {
-  id: string;
+  id: string | number;
   name: string;
-  quantity: number;
   price: number;
-  image: string;
+  quantity: number;
+  image?: string;
 }
 
 export interface Order {
   id: string;
-  date: string;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  total: number;
   items: OrderItem[];
+  total: number;
   shippingAddress: UserAddress;
-  paymentMethod: Pick<PaymentMethod, 'id' | 'last4' | 'cardBrand'>;
+  paymentMethod: PaymentMethod;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  date: string;
 }
 
 export interface User {
