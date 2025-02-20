@@ -14,6 +14,7 @@ import ProductCard from "../../components/ProductCard"
 import { motion, AnimatePresence } from "framer-motion"
 import type { User, PaymentMethod, UserAddress, Order, OrderItem } from "@/lib/types/user"
 import Image from "next/image"
+import { Dispatch, SetStateAction } from 'react'
 
 
 interface ExtendedFormData {
@@ -105,41 +106,39 @@ export default function ProfilePage() {
     // removeFromWishlist(product.id);
   }
 
-  const handleAddCard = (e: React.FormEvent) => {
-    e.preventDefault();
-    const last4 = newCard.cardNumber.slice(-4);
-    const cardBrand = getCardBrand(newCard.cardNumber);
+  const handleAddCard = (newCard: any) => {
+    if (!user) return;
 
+    const cardBrand = newCard.cardBrand || 'Unknown';
+    const last4 = newCard.last4 || '****';
+
+    const newPaymentMethod: PaymentMethod = {
+      id: `card_${Date.now()}`,
+      type: 'card',
+      cardBrand,
+      last4,
+      expiryMonth: newCard.expiryMonth.toString(),
+      expiryYear: newCard.expiryYear.toString(),
+      isDefault: user.paymentMethods ? user.paymentMethods.length === 0 : true
+    };
+
+    const updatedPaymentMethods = user.paymentMethods ? [...user.paymentMethods] : [];
+    
+    if (newPaymentMethod.isDefault) {
+      updatedPaymentMethods.forEach(method => {
+        method.isDefault = false;
+      });
+    }
+    
+    updatedPaymentMethods.push(newPaymentMethod);
+    
+    // Direct update instead of using a callback
     if (user) {
-      const newPaymentMethod: PaymentMethod = {
-        id: `card_${Date.now()}`,
-        type: "card",
-        cardBrand,
-        last4,
-        expiryMonth: parseInt(newCard.expiryMonth),
-        expiryYear: parseInt(newCard.expiryYear),
-        isDefault: !(user.paymentMethods && user.paymentMethods.length > 0)
-      };
-
-      const updatedPaymentMethods = [
-        ...(user.paymentMethods || []),
-        newPaymentMethod
-      ];
-
-      const updatedUser: Partial<User> = {
+      const updatedUser: User = {
         ...user,
         paymentMethods: updatedPaymentMethods
       };
-
       updateUser(updatedUser);
-      setShowAddCard(false);
-      setNewCard({
-        cardNumber: '',
-        expiryMonth: '',
-        expiryYear: '',
-        cvv: '',
-        cardholderName: ''
-      });
     }
   };
 
@@ -593,14 +592,14 @@ export default function ProfilePage() {
                     {user?.paymentMethods?.map((method) => (
                       <div
                         key={method.id}
-                        className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center"
+                        className={`payment-method ${method.isDefault ? 'border-green-500' : 'border-gray-200'}`}
                       >
                         <div className="flex items-center space-x-4">
                           <CreditCard className={`h-6 w-6 ${method.isDefault ? "text-green-600" : "text-gray-400"}`} />
                           <div>
                             <p className="font-medium">
                               {method.cardBrand} •••• {method.last4}
-                              {method.isDefault && <span className="ml-2 text-sm text-green-600">Default</span>}
+                              {method.isDefault && <span className="text-green-500 text-sm">Default</span>}
                             </p>
                             <p className="text-sm text-gray-500">
                               Expires {method.expiryMonth}/{method.expiryYear}

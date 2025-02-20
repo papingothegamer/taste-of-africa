@@ -14,6 +14,7 @@ export interface PaymentMethod {
   expiryMonth?: string;
   expiryYear?: string;
   cardType?: string;
+  isDefault?: boolean;
 }
 
 export interface OrderItem {
