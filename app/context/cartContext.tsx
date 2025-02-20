@@ -4,20 +4,20 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useAuth } from './authContext';
 
 interface CartItem {
-  id: string;
+  id: string | number;
   name: string;
   price: number;
   quantity: number;
-  image: string;
+  image?: string;
   category: string;
   rating: number;
 }
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (item: Omit<CartItem, 'quantity'>) => void;
-  removeFromCart: (itemId: string) => void;
-  updateQuantity: (itemId: string, quantity: number) => void;
+  addToCart: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
+  removeFromCart: (id: string | number) => void;
+  updateQuantity: (id: string | number, quantity: number) => void;
   clearCart: () => void;
   total: number;
   cartTotal: number;
@@ -41,7 +41,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [user]);
 
-  const addToCart = (item: Omit<CartItem, 'quantity'>) => {
+  const addToCart = (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => {
     if (user) {
       setCartItems(prev => {
         const existingItem = prev.find(i => i.id === item.id);
@@ -59,7 +59,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const removeFromCart = (itemId: string) => {
+  const removeFromCart = (itemId: string | number) => {
     if (user) {
       const updated = cartItems.filter(item => item.id !== itemId);
       setCartItems(updated);
@@ -67,7 +67,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const updateQuantity = (itemId: string, quantity: number) => {
+  const updateQuantity = (itemId: string | number, quantity: number) => {
     if (user) {
       const updated = cartItems.map(item =>
         item.id === itemId ? { ...item, quantity } : item

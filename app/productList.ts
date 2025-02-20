@@ -8,6 +8,7 @@ export interface Product {
   description: string;
 }
 
+
 export const allProducts = [
   {
     id: 1,
