@@ -89,7 +89,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white">
               Sign in
             </Button>
           </form>
